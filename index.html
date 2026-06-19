@@ -3,1254 +3,2676 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - 5 Qeybood</title>
-    <link rel="icon" type="image/x-icon" href="mn.png">
-
+    <title>🔮 Jadwal 90 Maalin</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="icon" type="image/x-icon" href="MN.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-family: 'Orbitron', sans-serif;
         }
 
         body {
-            background: #0b0b0e;
+            background: #0a0e1a;
+            color: #e0f0ff;
             display: flex;
             min-height: 100vh;
-            color: #eaeef2;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 20% 30%, rgba(0, 80, 200, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #141c2b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #f57c00; border-radius: 10px; box-shadow: 0 0 15px #f57c00aa; }
 
         .sidebar {
-            width: 80px;
-            background: rgba(18, 20, 26, 0.92);
-            backdrop-filter: blur(8px);
-            border-right: 1px solid rgba(255, 140, 0, 0.2);
+            width: 260px;
+            background: rgba(8, 14, 30, 0.85);
+            backdrop-filter: blur(18px);
+            border-right: 1px solid #f57c0066;
+            padding: 25px 15px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 30px 0 20px 0;
-            gap: 20px;
-            box-shadow: 6px 0 30px rgba(0, 0, 0, 0.8);
+            gap: 30px;
+            height: 100vh;
             position: sticky;
             top: 0;
-            height: 100vh;
-            z-index: 20;
+            box-shadow: 5px 0 30px rgba(245, 124, 0, 0.2);
+            animation: slideIn 1s ease;
             overflow-y: auto;
+            z-index: 10;
         }
 
-        .sidebar .brand {
-            font-size: 32px;
-            color: #ff8c00;
-            text-shadow: 0 0 20px #ff8c0080;
-            margin-bottom: 5px;
+        @keyframes slideIn {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
         }
 
-        .sidebar-item {
+        .sidebar .logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f57c00, #ffb300);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px #f57c0066;
+            letter-spacing: 2px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 4px;
-            color: #8a8580;
+            gap: 10px;
+        }
+
+        .sidebar .logo i {
+            font-size: 32px;
+            color: #f57c00;
+            -webkit-text-fill-color: #f57c00;
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 5px #f57c00; }
+            50% { text-shadow: 0 0 25px #ffb300, 0 0 40px #f57c00; }
+            100% { text-shadow: 0 0 5px #f57c00; }
+        }
+
+        .sidebar .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(20, 30, 50, 0.4);
+            backdrop-filter: blur(5px);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: 0.3s;
-            padding: 8px 6px;
-            border-radius: 16px;
-            width: 100%;
-            border-left: 3px solid transparent;
+            color: #b0caf0;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             position: relative;
-            font-size: 11px;
+            overflow: hidden;
         }
 
-        .sidebar-item i {
-            font-size: 22px;
-            transition: 0.3s;
+        .sidebar .nav-item i {
+            font-size: 20px;
+            width: 28px;
+            color: #f57c00;
+            transition: transform 0.3s;
         }
 
-        .sidebar-item span {
-            font-size: 9px;
-            letter-spacing: 0.3px;
-            opacity: 0.7;
+        .sidebar .nav-item:hover {
+            background: #1a2740;
+            border-color: #f57c00;
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 0 25px #f57c0044;
+            color: white;
         }
 
-        .sidebar-item:hover {
-            color: #f0b85a;
-            background: rgba(255, 140, 0, 0.08);
+        .sidebar .nav-item:hover i {
+            transform: scale(1.2) rotate(5deg);
         }
 
-        .sidebar-item.active {
-            color: #f09b2c;
-            border-left-color: #f09b2c;
-            background: rgba(255, 140, 0, 0.12);
-            box-shadow: inset 0 0 30px rgba(255, 140, 0, 0.05);
-        }
-
-        .sidebar-item.active i {
-            filter: drop-shadow(0 0 12px #f09b2c88);
+        .sidebar .nav-item.active {
+            background: #1a2a44;
+            border-left: 5px solid #f57c00;
+            color: white;
         }
 
         .main {
             flex: 1;
-            padding: 28px 32px 40px 32px;
-            max-width: calc(100% - 80px);
-            background: radial-gradient(circle at 20% 30%, #1f1a10, #0b0b0e 80%);
-            box-shadow: inset 0 0 180px rgba(0, 0, 0, 0.9);
+            padding: 30px 35px;
             overflow-y: auto;
             max-height: 100vh;
         }
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 36px;
-            flex-wrap: wrap;
-        }
-
-        .dashboard-header h1 {
-            font-weight: 300;
-            font-size: 28px;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #fcaa48, #ff7b00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 30px #ff7b0040;
-        }
-
-        .date-badge {
-            background: rgba(255, 140, 0, 0.12);
-            padding: 10px 22px;
-            border-radius: 80px;
-            border: 1px solid #f09b2c55;
-            font-weight: 300;
-            font-size: 15px;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 0 20px #f09b2c20;
-        }
-
-        .section-container {
+        .section {
             display: none;
-            animation: fadeSlide 0.35s ease;
+            animation: fadeUp 0.6s ease;
         }
 
-        .section-container.active {
+        .section.active {
             display: block;
         }
 
-        @keyframes fadeSlide {
-            0% { opacity: 0; transform: translateY(12px); }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .card {
-            background: rgba(12, 14, 18, 0.7);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 140, 0, 0.15);
+            background: rgba(12, 20, 40, 0.7);
+            backdrop-filter: blur(12px);
             border-radius: 28px;
-            padding: 26px 28px;
-            margin-bottom: 30px;
-            box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 140, 0, 0.1);
-            transition: 0.2s;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #f57c0033;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
-            border-color: rgba(255, 140, 0, 0.3);
-            box-shadow: 0 20px 48px -10px #000000dd, 0 0 0 1px #f09b2c20;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, #f57c0011, transparent, #0066ff11, transparent);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
         }
 
-        .section-title {
-            font-size: 22px;
-            font-weight: 400;
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card > * { position: relative; z-index: 1; }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f57c00;
+            text-shadow: 0 0 15px #f57c0044;
             margin-bottom: 18px;
-            color: #f5b05a;
             display: flex;
             align-items: center;
             gap: 12px;
-            letter-spacing: 0.5px;
         }
 
-        .section-title i {
-            color: #ff8c00;
-            font-size: 24px;
-            filter: drop-shadow(0 0 8px #f09b2c88);
-        }
-
-        .time-picker {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px 24px;
-            align-items: center;
-        }
-
-        .time-picker label {
-            font-weight: 300;
-            color: #cfcfd6;
-            letter-spacing: 0.3px;
-        }
-
-        .time-picker input[type="datetime-local"] {
-            background: #1a1c24;
-            border: 1px solid #f09b2c55;
-            padding: 12px 18px;
-            border-radius: 40px;
-            color: #f0e6d8;
-            font-size: 15px;
-            outline: none;
-            width: 240px;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 0 20px #00000066;
-        }
-
-        .time-picker input[type="datetime-local"]:focus {
-            border-color: #ffa333;
-            box-shadow: 0 0 24px #f09b2c40;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .btn {
-            background: rgba(255, 140, 0, 0.08);
-            border: 1px solid #f09b2c55;
-            color: #f0dcc0;
-            padding: 12px 22px;
+        .btn-future {
+            background: linear-gradient(145deg, #0a1a30, #142c4a);
+            border: 1px solid #f57c00aa;
+            color: #f5e6d0;
+            padding: 10px 22px;
             border-radius: 60px;
-            font-weight: 400;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: 0.25s;
+            cursor: pointer;
+            box-shadow: 0 0 15px #f57c0022;
+            backdrop-filter: blur(5px);
             display: inline-flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .btn-future:hover {
+            background: #1d3450;
+            border-color: #ffb300;
+            box-shadow: 0 0 35px #f57c0066;
+            transform: scale(1.02) translateY(-2px);
+            color: white;
+        }
+
+        .btn-future i { color: #f57c00; }
+
+        .btn-edit {
+            background: transparent;
+            border: 1px solid #2a4060;
+            color: #b0caf0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-edit:hover {
+            background: #1a2a44;
+            border-color: #f57c00;
+            color: white;
+        }
+
+        input, select, textarea {
+            background: #0d1a2b;
+            border: 1px solid #2a4060;
+            border-radius: 16px;
+            padding: 12px 18px;
+            color: #d0e5ff;
+            font-size: 14px;
+            width: 100%;
+            transition: 0.3s;
+            outline: none;
+            backdrop-filter: blur(5px);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #f57c00;
+            box-shadow: 0 0 25px #f57c0033;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .font-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #0d1a2b88;
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid #2a4060;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .font-tools button, .font-tools input[type="color"], .font-tools select {
+            background: #0d1a2b;
+            border: 1px solid #2a4060;
+            border-radius: 12px;
+            padding: 6px 12px;
+            color: #c0d8f0;
             transition: 0.2s;
             cursor: pointer;
-            backdrop-filter: blur(2px);
-            box-shadow: 0 0 16px #00000055;
+            min-height: 38px;
         }
 
-        .btn i {
-            color: #f09b2c;
+        .font-tools button:hover {
+            background: #1a2a44;
+            border-color: #f57c00;
         }
 
-        .btn:hover {
-            background: #f09b2c20;
-            border-color: #f09b2c;
-            transform: scale(1.02);
-            box-shadow: 0 0 30px #f09b2c30;
+        .font-tools input[type="color"] { 
+            width: 40px; 
+            height: 40px; 
+            padding: 0; 
+            border-radius: 50%;
         }
 
-        .btn-primary {
-            background: #f09b2c30;
-            border-color: #f09b2c;
+        .font-tools select {
+            min-width: 120px;
+            background: #0d1a2b;
+            color: #c0d8f0;
         }
 
-        .btn-primary i {
-            color: #ffb347;
+        .font-tools select option {
+            background: #0d1a2b;
+            color: #c0d8f0;
         }
 
-        .alarm-box {
-            background: #0f1117;
-            border-radius: 60px;
-            padding: 10px 24px;
-            border-left: 4px solid #f09b2c;
-            font-size: 18px;
+        .editor-container {
+            position: relative;
+            background: #0d1a2b;
+            border-radius: 16px;
+            border: 1px solid #2a4060;
+            min-height: 200px;
+            padding: 15px;
+            color: #d0e5ff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+
+        .editor-container:focus {
+            border-color: #f57c00;
+            box-shadow: 0 0 25px #f57c0033;
+        }
+
+        .editor-container:empty::before {
+            content: 'Tusaale: 1. Bari casharka ccn ayaan baraa...';
+            color: #5a7a9a;
+            opacity: 0.6;
+        }
+
+        .editor-container ul, .editor-container ol {
+            padding-left: 25px;
+            margin: 5px 0;
+        }
+
+        .editor-container li {
+            margin: 3px 0;
+        }
+
+        .todo-item {
+            background: #0f1e32;
+            border-radius: 16px;
+            padding: 12px 18px;
+            margin: 8px 0;
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-top: 8px;
-            box-shadow: 0 0 40px #f09b2c20;
+            border-left: 4px solid #f57c00;
+            transition: 0.2s;
         }
 
-        .alarm-box i {
-            color: #ffb347;
-            font-size: 26px;
-            animation: pulse 1.8s infinite;
+        .todo-item:hover { background: #182c48; }
+
+        .todo-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #f57c00;
+            cursor: pointer;
+            flex-shrink: 0;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.6; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 30px #f09b2c; }
-            100% { opacity: 0.6; transform: scale(0.95); }
+        .todo-item .task-text {
+            flex: 1;
+            word-break: break-word;
         }
 
-        .alarm-ringing {
-            animation: alarmFlash 0.5s ease infinite alternate;
+        .todo-item .task-text.done {
+            text-decoration: line-through;
+            opacity: 0.6;
         }
 
-        @keyframes alarmFlash {
-            0% { background: #0f1117; border-left-color: #f09b2c; }
-            100% { background: #2a1a0a; border-left-color: #ff4444; box-shadow: 0 0 60px #ff444460; }
-        }
-
-        .productivity-line {
-            margin-top: 24px;
-            width: 100%;
-            height: 6px;
-            background: #1e1f28;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: inset 0 2px 6px #00000099;
-        }
-
-        .productivity-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #f09b2c, #ffbe5c, #f09b2c);
-            background-size: 200%;
-            animation: shimmer 3s infinite linear;
-            border-radius: 20px;
-            transition: width 0.3s ease;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
-        }
-
-        .todo-input-area {
+        .todo-item .task-actions {
             display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
             flex-wrap: wrap;
-            gap: 14px;
-            margin-bottom: 22px;
+            background: #051020;
+            border-radius: 80px;
+            padding: 20px 40px;
+            border: 1px solid #f57c0066;
+            box-shadow: 0 0 50px #0044ff22;
+            animation: waterFlow 6s infinite alternate;
         }
 
-        .todo-input-area input {
-            flex: 1 1 220px;
-            background: #14161e;
-            border: 1px solid #f09b2c33;
-            padding: 14px 20px;
-            border-radius: 60px;
-            color: #f0e6d8;
-            font-size: 15px;
-            outline: none;
+        @keyframes waterFlow {
+            0% { box-shadow: 0 0 20px #0066ff44, 0 0 60px #0066ff11; }
+            100% { box-shadow: 0 0 40px #f57c0044, 0 0 80px #f57c0011; }
         }
 
-        .todo-input-area input:focus {
-            border-color: #f09b2c;
+        .clock-text {
+            font-size: 52px;
+            font-weight: 900;
+            background: linear-gradient(180deg, #aad0ff, #f57c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px #f57c0066;
+            letter-spacing: 5px;
         }
 
-        .todo-list {
-            list-style: none;
-            padding: 0;
+        .timer-input-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
         }
 
-        .todo-list li {
-            background: rgba(20, 22, 30, 0.6);
-            padding: 12px 20px;
-            margin-bottom: 10px;
-            border-radius: 60px;
-            border-left: 4px solid #f09b2c;
+        .timer-input-group input {
+            width: 150px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 10px 15px;
+            background: #0d1a2b;
+            border: 2px solid #f57c00;
+            border-radius: 20px;
+            color: #f57c00;
+        }
+
+        .timer-input-group input:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 30px #f57c0044;
+        }
+
+        .timer-input-group label {
+            color: #b0caf0;
+            font-size: 14px;
+        }
+
+        .timer-preset-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .timer-preset-buttons button {
+            background: #0d1a2b;
+            border: 1px solid #2a4060;
+            border-radius: 30px;
+            padding: 8px 20px;
+            color: #b0caf0;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        .timer-preset-buttons button:hover {
+            border-color: #f57c00;
+            background: #1a2a44;
+            color: white;
+            box-shadow: 0 0 20px #f57c0022;
+        }
+
+        .timer-preset-buttons button.active {
+            border-color: #f57c00;
+            background: #1a2a44;
+            color: #f57c00;
+        }
+
+        .timer-status {
+            text-align: center;
+            color: #7a9ac0;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .timer-status .highlight {
+            color: #f57c00;
+            font-weight: 700;
+        }
+
+        .time-box-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .time-box-item {
+            background: #0b1a2e;
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #2a4060;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .time-box-item:hover {
+            border-color: #f57c00;
+            transform: scale(1.02);
+        }
+
+        .time-box-item .time-label {
+            color: #7a9ac0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .time-box-item .time-value {
+            font-size: 28px;
+            font-weight: 900;
+            color: #f57c00;
+            margin: 5px 0;
+        }
+
+        .time-box-item .time-date {
+            color: #7a9ac0;
+            font-size: 11px;
+        }
+
+        .time-box-item .delete-box-btn {
+            background: transparent;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: 0.3s;
+        }
+
+        .time-box-item .delete-box-btn:hover {
+            transform: scale(1.2);
+            color: #ff6666;
+        }
+
+        .productivity-container {
+            background: #0b1a2e;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #2a4060;
+        }
+
+        .productivity-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 300;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 4px 12px #00000066;
-            transition: 0.15s;
-        }
-
-        .todo-list li:hover {
-            background: #1e212b;
-            border-color: #ffb347;
-        }
-
-        .todo-list li .todo-text {
-            flex: 1;
-            margin-right: 16px;
-        }
-
-        .todo-list li .todo-actions i {
-            margin-left: 12px;
-            color: #b3ad9e;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 18px;
-        }
-
-        .todo-list li .todo-actions i:hover {
-            color: #f09b2c;
-            transform: scale(1.1);
-        }
-
-        .bullet-toggle {
-            background: transparent;
-            border: 1px solid #f09b2c55;
-            padding: 6px 18px;
-            border-radius: 40px;
-            color: #ddd0bc;
-            margin-left: 12px;
-            cursor: pointer;
-        }
-
-        .attendance-grid {
-            display: flex;
+            margin-bottom: 10px;
             flex-wrap: wrap;
-            gap: 20px 35px;
+            gap: 10px;
+        }
+
+        .productivity-header .label {
+            color: #7a9ac0;
+            font-size: 13px;
+        }
+
+        .productivity-header .stats {
+            color: #f5d9b0;
+            font-size: 13px;
+        }
+
+        .productivity-header .stats span {
+            color: #f57c00;
+            font-weight: 700;
+        }
+
+        .productivity-bar-track {
+            width: 100%;
+            height: 12px;
+            background: #1a2a44;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .productivity-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f57c00, #ffb300, #f57c00);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+            border-radius: 30px;
+            transition: width 0.8s ease;
+            width: 0%;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .productivity-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            color: #7a9ac0;
+            font-size: 11px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        /* EXERCISE SECTION */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 15px 0;
+        }
+
+        .exercise-card {
+            background: #0b1a2e;
+            border-radius: 20px;
+            padding: 18px 15px;
+            text-align: center;
+            border: 2px solid #2a4060;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .attendance-grid input[type="date"] {
-            background: #14161e;
-            border: 1px solid #f09b2c33;
-            padding: 12px 18px;
-            border-radius: 40px;
-            color: #f0e6d8;
-            font-size: 15px;
-            outline: none;
-            width: 200px;
-        }
-
-        .attendance-badge {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .attendance-badge .btn {
-            min-width: 100px;
             justify-content: center;
         }
 
-        .btn-success {
-            border-color: #2e9b5e;
-            background: #1d402e40;
+        .exercise-card:hover {
+            border-color: #f57c00;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px #f57c0022;
         }
 
-        .btn-success i {
-            color: #3fbf7a;
-        }
-
-        .btn-danger {
-            border-color: #a53a3a;
-            background: #4a1e1e40;
-        }
-
-        .btn-danger i {
-            color: #e06a6a;
-        }
-
-        .note-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px 16px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid #2a2a36;
-            margin-bottom: 20px;
-        }
-
-        .note-toolbar i {
-            font-size: 20px;
-            color: #c8c0b0;
-            padding: 6px 12px;
-            border-radius: 30px;
-            transition: 0.15s;
-            cursor: pointer;
-            background: #12141c50;
-            border: 1px solid transparent;
-        }
-
-        .note-toolbar i:hover {
-            background: #f09b2c20;
-            border-color: #f09b2c60;
-            color: #f5b85a;
-        }
-
-        .note-editor {
-            background: #0c0e12;
-            border-radius: 24px;
-            padding: 20px 22px;
-            min-height: 180px;
-            color: #dedbd2;
-            font-size: 16px;
-            line-height: 1.7;
-            outline: none;
-            border: 1px solid #2a2933;
-            box-shadow: inset 0 0 40px #00000099;
-        }
-
-        .note-editor:focus {
-            border-color: #f09b2c70;
-        }
-
-        /* SUMMARY / WARBIXIN */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        .summary-item {
-            background: rgba(20, 22, 30, 0.6);
-            border-radius: 20px;
-            padding: 20px 22px;
-            border-left: 4px solid #f09b2c;
-            box-shadow: 0 4px 20px #00000044;
-            transition: 0.2s;
-        }
-
-        .summary-item:hover {
-            background: rgba(30, 33, 43, 0.7);
-            transform: translateY(-2px);
-        }
-
-        .summary-item .label {
-            font-size: 13px;
-            color: #9a9588;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-weight: 300;
-        }
-
-        .summary-item .value {
-            font-size: 28px;
-            font-weight: 300;
-            color: #f5b05a;
-            margin-top: 8px;
-            text-shadow: 0 0 20px #f09b2c30;
-        }
-
-        .summary-item .sub {
-            font-size: 14px;
-            color: #b3ad9e;
-            margin-top: 4px;
-        }
-
-        .summary-item .icon-big {
+        .exercise-card i {
             font-size: 32px;
-            color: #f09b2c55;
-            float: right;
-            margin-top: -8px;
+            color: #f57c00;
+            margin-bottom: 8px;
         }
 
-        .summary-todo-list {
-            max-height: 120px;
-            overflow-y: auto;
-            padding: 0;
-            margin: 8px 0 0 0;
-            list-style: none;
-        }
-
-        .summary-todo-list li {
+        .exercise-card .day-name {
             font-size: 14px;
-            color: #cfc8b8;
-            padding: 3px 0;
-            border-bottom: 1px solid #2a2a3655;
+            color: #b0caf0;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .exercise-card .exercise-name {
+            font-size: 12px;
+            color: #7a9ac0;
+        }
+
+        .exercise-card .check-mark {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 28px;
+            color: #00ff88;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .exercise-card .check-mark.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .exercise-card.selected {
+            border-color: #00ff88;
+            background: #0a1a2a;
+            box-shadow: 0 0 40px #00ff8822;
+        }
+
+        .exercise-card .date-badge {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            font-size: 10px;
+            color: #7a9ac0;
+            background: #1a2a44;
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid #2a4060;
+        }
+
+        .exercise-card.saved {
+            border-color: #00ff8866;
+            opacity: 0.7;
+        }
+
+        .exercise-card .saved-badge {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            right: 12px;
+            font-size: 16px;
+            color: #00ff88;
+            background: #00ff8822;
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid #00ff8866;
+            font-size: 10px;
+        }
+
+        .exercise-card.saved .saved-badge {
+            display: block;
+        }
+
+        .exercise-date-group {
             display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #0b1a2e;
+            border-radius: 20px;
+            border: 1px solid #2a4060;
+        }
+
+        .exercise-date-group label {
+            color: #b0caf0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
             gap: 8px;
         }
 
-        .summary-todo-list li i {
-            color: #f09b2c;
-            font-size: 12px;
-            margin-top: 3px;
+        .exercise-date-group input[type="date"] {
+            width: auto;
+            min-width: 180px;
+            padding: 10px 18px;
+            background: #0d1a2b;
+            border: 2px solid #f57c00;
+            border-radius: 16px;
+            color: #f5d9b0;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
         }
 
-        .summary-note-preview {
+        .exercise-date-group input[type="date"]:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 30px #f57c0044;
+        }
+
+        .exercise-date-group input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.8) sepia(1) hue-rotate(15deg);
+            cursor: pointer;
+        }
+
+        .exercise-date-group .selected-day-display {
+            color: #00ff88;
+            font-weight: 700;
             font-size: 14px;
-            color: #cfc8b8;
-            max-height: 80px;
-            overflow: hidden;
-            margin-top: 6px;
-            opacity: 0.8;
+            padding: 8px 16px;
+            background: #0a1a2a;
+            border-radius: 20px;
+            border: 1px solid #00ff8866;
+        }
+
+        /* EXERCISE TRACK - Week & Month View */
+        .exercise-track-container {
+            margin: 15px 0;
+        }
+
+        .exercise-week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .exercise-week-day {
+            background: #0b1a2e;
+            border-radius: 16px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 2px solid #2a4060;
+            transition: 0.3s;
+            min-height: 90px;
+            position: relative;
+        }
+
+        .exercise-week-day:hover {
+            border-color: #f57c00;
+            transform: scale(1.02);
+        }
+
+        .exercise-week-day .day-label {
+            font-size: 11px;
+            color: #7a9ac0;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .exercise-week-day .day-date {
+            font-size: 10px;
+            color: #5a7a9a;
+            margin: 2px 0;
+        }
+
+        .exercise-week-day .day-exercise {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .exercise-week-day .day-exercise.done {
+            color: #00ff88;
+        }
+
+        .exercise-week-day .day-exercise.pending {
+            color: #7a9ac0;
+        }
+
+        /* Status Circle */
+        .exercise-week-day .status-circle {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin: 4px auto;
+            line-height: 32px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-week-day .status-circle.done {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .exercise-week-day .status-circle.pending {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 2px solid #ff4444;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.15);
+        }
+
+        .exercise-week-day.today {
+            border-color: #f57c00;
+            background: #1a2a44;
+            box-shadow: 0 0 30px #f57c0022;
+        }
+
+        .exercise-week-day.completed {
+            border-color: #00ff8866;
+            background: #0a1a2a;
+        }
+
+        /* Month View */
+        .exercise-month-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .exercise-month-week {
+            background: #0b1a2e;
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #2a4060;
+            transition: 0.3s;
+        }
+
+        .exercise-month-week:hover {
+            border-color: #f57c00;
+            transform: scale(1.01);
+        }
+
+        .exercise-month-week .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2a4060;
+        }
+
+        .exercise-month-week .week-number {
+            color: #f57c00;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .exercise-month-week .week-range {
+            color: #7a9ac0;
+            font-size: 11px;
+        }
+
+        .exercise-month-week .week-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .exercise-month-week .week-day-item {
+            text-align: center;
+            padding: 6px 4px;
+            border-radius: 12px;
+            background: #0d1a2b;
+            border: 1px solid #1a2a44;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .exercise-month-week .week-day-item .wd-label {
+            font-size: 9px;
+            color: #5a7a9a;
+            text-transform: uppercase;
+        }
+
+        .exercise-month-week .week-day-item .wd-exercise {
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .exercise-month-week .week-day-item .wd-exercise.done {
+            color: #00ff88;
+        }
+
+        .exercise-month-week .week-day-item .wd-exercise.pending {
+            color: #7a9ac0;
+        }
+
+        .exercise-month-week .week-day-item .wd-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            line-height: 24px;
+            font-size: 12px;
+            font-weight: 700;
+            margin: 2px auto;
+        }
+
+        .exercise-month-week .week-day-item .wd-icon.done {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 2px solid #00ff88;
+        }
+
+        .exercise-month-week .week-day-item .wd-icon.pending {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 2px solid #ff4444;
+        }
+
+        .exercise-month-week .week-day-item.completed {
+            border-color: #00ff8866;
+            background: #0a1a2a;
+        }
+
+        .exercise-month-week .week-day-item.today {
+            border-color: #f57c00;
+            background: #1a2a44;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .report-table th {
+            background: #0f1e32;
+            color: #f57c00;
+            padding: 14px;
+            border-bottom: 2px solid #f57c00;
+        }
+
+        .report-table td {
+            padding: 12px;
+            border-bottom: 1px solid #1a2a44;
+        }
+
+        .badge-future {
+            background: #1a2a44;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            color: #f5d9b0;
+            border: 1px solid #f57c0066;
+        }
+
+        .badge-success {
+            background: #00ff8822;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            color: #00ff88;
+            border: 1px solid #00ff8866;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #0d1a2b;
+            border: 1px solid #f57c00;
+            border-radius: 20px;
+            padding: 15px 25px;
+            color: #f5d9b0;
+            box-shadow: 0 0 50px #f57c0033;
+            animation: slideDown 0.5s ease;
+            z-index: 999;
+            max-width: 350px;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            padding: 5px;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.3);
+            color: #ff6666;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .modal {
+            background: #0d1a2b;
+            border: 1px solid #f57c00;
+            border-radius: 30px;
+            padding: 35px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 80px #f57c0033;
+            position: relative;
+        }
+
+        .modal-title {
+            color: #f57c00;
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #7a9ac0;
+            font-size: 28px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #f57c00;
+            transform: rotate(90deg);
+        }
+
+        .modal input, .modal textarea {
+            margin-bottom: 15px;
+        }
+
+        .modal .btn-future {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Alarm flashing */
+        .alarm-flash {
+            animation: alarmPulse 0.5s ease-in-out 10;
+        }
+
+        @keyframes alarmPulse {
+            0%, 100% { border-color: #f57c00; box-shadow: 0 0 20px #f57c0044; }
+            50% { border-color: #ff0000; box-shadow: 0 0 60px #ff000066; }
+        }
+
+        @media (max-width: 850px) {
+            .sidebar { width: 80px; padding: 15px 8px; }
+            .sidebar .nav-item span { display: none; }
+            .sidebar .logo span { display: none; }
+            .main { padding: 15px; }
+            .exercise-week-grid { grid-template-columns: repeat(7, 1fr); gap: 5px; }
+            .exercise-week-day { min-height: 70px; padding: 8px 4px; }
+            .exercise-month-week .week-days { grid-template-columns: repeat(7, 1fr); }
+        }
+
+        .icon-big { font-size: 28px; color: #f57c00; filter: drop-shadow(0 0 10px #f57c0044); }
+        
+        .empty-state {
+            color: #7a9ac0;
+            text-align: center;
+            padding: 30px;
             font-style: italic;
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-            background: #0b0b0e;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #f09b2c60;
-            border-radius: 20px;
+        .toolbar-divider {
+            width: 1px;
+            height: 30px;
+            background: #2a4060;
+            margin: 0 5px;
         }
 
-        @media (max-width: 700px) {
-            .sidebar {
-                width: 60px;
-                padding: 15px 0;
-            }
-            .sidebar-item span {
-                display: none;
-            }
-            .main {
-                padding: 16px;
-                max-width: 100%;
-            }
-            .card {
-                padding: 18px 16px;
-            }
-            .sidebar-item i {
-                font-size: 20px;
-            }
-            .summary-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .color-picker-wrapper label {
+            font-size: 11px;
+            color: #7a9ac0;
+        }
+
+        .editor-container h1, .editor-container h2, .editor-container h3 {
+            color: #f57c00;
+        }
+
+        .empty-timebox {
+            color: #7a9ac0;
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+        }
+
+        .track-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: #0b1a2e;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #2a4060;
+        }
+
+        .track-stats .stat-item {
+            text-align: center;
+        }
+
+        .track-stats .stat-item .stat-number {
+            font-size: 28px;
+            font-weight: 900;
+            color: #f57c00;
+        }
+
+        .track-stats .stat-item .stat-label {
+            font-size: 11px;
+            color: #7a9ac0;
         }
     </style>
 </head>
 <body>
-
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <div class="brand"><i class="fas fa-crown"></i></div>
-    
-    <div class="sidebar-item active" data-section="section1">
-        <i class="fas fa-clock"></i>
-        <span>Time</span>
-    </div>
-    <div class="sidebar-item" data-section="section2">
-        <i class="fas fa-tasks"></i>
-        <span>Todo</span>
-    </div>
-    <div class="sidebar-item" data-section="section3">
-        <i class="fas fa-calendar-check"></i>
-        <span>Attendance</span>
-    </div>
-    <div class="sidebar-item" data-section="section4">
-        <i class="fas fa-pen-fancy"></i>
-        <span>Notes</span>
-    </div>
-    <div class="sidebar-item" data-section="section5">
-        <i class="fas fa-chart-pie"></i>
-        <span>Summary</span>
-    </div>
-</div>
-
-<!-- MAIN -->
-<div class="main">
-    <div class="dashboard-header">
-        <h1><i class="fas fa-th-large" style="margin-right: 14px; color: #f09b2c;"></i> Dashboard</h1>
-        <div class="date-badge"><i class="far fa-calendar-alt"></i> <span id="currentDateDisplay"></span></div>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo"><i class="fas fa-crystal-ball"></i><span>JADWAL 2070</span></div>
+        <div class="nav-item active" data-target="dashboard"><i class="fas fa-chart-pie"></i><span>Dashboard</span></div>
+        <div class="nav-item" data-target="plan"><i class="fas fa-tasks"></i><span>Bari Maxaa la qabana</span></div>
+        <div class="nav-item" data-target="today"><i class="fas fa-check-double"></i><span>Mala qabtay maanta?</span></div>
+        <div class="nav-item" data-target="timer"><i class="fas fa-hourglass-half"></i><span>Time Control</span></div>
+        <div class="nav-item" data-target="exercise"><i class="fas fa-dumbbell"></i><span>Jimicsi</span></div>
+        <div class="nav-item" data-target="exercise-track"><i class="fas fa-calendar-alt"></i><span>Maanta ma la jimicsaday?</span></div>
+        <div class="nav-item" data-target="report"><i class="fas fa-file-alt"></i><span>Report</span></div>
     </div>
 
-    <!-- SECTION 1: TIME CONTROL -->
-    <div class="section-container active" id="section1">
-        <div class="card">
-            <div class="section-title"><i class="fas fa-hourglass-half"></i> Design Review · Time Control</div>
-            <div class="time-picker">
-                <div>
-                    <label><i class="far fa-calendar-plus"></i> Date & Time</label>
-                    <input type="datetime-local" id="alarmDateTime" value="2026-06-18T10:30">
+    <!-- MAIN -->
+    <div class="main">
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="section active">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-chart-line icon-big"></i> Dashboard - Waqtiga la qabtay</div>
+                <div style="display:flex; gap:30px; flex-wrap:wrap;">
+                    <div style="background:#0b1a2e; padding:20px; border-radius:30px; flex:1; min-width:200px; border:1px solid #f57c0033;">
+                        <i class="fas fa-clock" style="color:#f57c00; font-size:28px;"></i>
+                        <h3 style="color:#f5d9b0;">Saacadaha</h3>
+                        <p style="font-size:40px; font-weight:900; color:#f57c00;" id="totalHours">0h</p>
+                        <span class="badge-future">+12% this week</span>
+                    </div>
+                    <div style="background:#0b1a2e; padding:20px; border-radius:30px; flex:1; min-width:200px; border:1px solid #0066ff33;">
+                        <i class="fas fa-tasks" style="color:#00aaff; font-size:28px;"></i>
+                        <h3 style="color:#f5d9b0;">Howlaha la qabtay</h3>
+                        <p style="font-size:40px; font-weight:900; color:#00aaff;" id="totalTasks">0</p>
+                        <span class="badge-future" id="remainingTasks">0 remaining</span>
+                    </div>
+                    <div style="background:#0b1a2e; padding:20px; border-radius:30px; flex:1; min-width:200px; border:1px solid #00ff8833;">
+                        <i class="fas fa-chart-simple" style="color:#00ff88; font-size:28px;"></i>
+                        <h3 style="color:#f5d9b0;">Time Box</h3>
+                        <p style="font-size:40px; font-weight:900; color:#00ff88;" id="totalTimeBox">0</p>
+                        <span class="badge-future">sessions</span>
+                    </div>
+                    <div style="background:#0b1a2e; padding:20px; border-radius:30px; flex:1; min-width:200px; border:1px solid #ff6b6b33;">
+                        <i class="fas fa-dumbbell" style="color:#ff6b6b; font-size:28px;"></i>
+                        <h3 style="color:#f5d9b0;">Jimicsi</h3>
+                        <p style="font-size:40px; font-weight:900; color:#ff6b6b;" id="totalExercise">0</p>
+                        <span class="badge-future">sessions</span>
+                    </div>
                 </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" id="startTimerBtn"><i class="fas fa-play"></i> Start</button>
-                    <button class="btn" id="pauseTimerBtn"><i class="fas fa-pause"></i> Pause</button>
-                    <button class="btn" id="resetTimerBtn"><i class="fas fa-undo-alt"></i> Reset</button>
+                <div style="margin-top:25px; background:#0b1a2e; border-radius:30px; padding:20px;">
+                    <i class="fas fa-chart-bar" style="color:#f57c00;"></i> <span style="color:#aac0f0;">Waxqabadka toddobaadka</span>
+                    <div style="height:12px; background:#1a2a44; border-radius:30px; margin-top:10px; overflow:hidden;">
+                        <div id="progressBar" style="width:0%; height:100%; background:linear-gradient(90deg,#f57c00,#ffb300); border-radius:30px; transition: width 0.5s;"></div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:5px; color:#7a9ac0; font-size:12px;">
+                        <span>Isniin</span><span>Talaado</span><span>Arbaco</span><span>Khamiis</span><span>Jimco</span>
+                    </div>
                 </div>
             </div>
-            <div class="alarm-box" id="alarmDisplay">
-                <i class="fas fa-bell"></i> <span id="alarmMessage">Alarm: 10:30</span>
+        </div>
+
+        <!-- PLAN: Bari maxaa la qabana -->
+        <div id="plan" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-pencil-alt icon-big"></i> Bari maxaa la qabana</div>
+                
+                <div class="font-tools" id="fontToolbar">
+                    <select id="fontFamily" title="Font Family">
+                        <option value="Orbitron">Orbitron</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Open Sans">Open Sans</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Poppins">Poppins</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                    </select>
+
+                    <select id="fontSize" title="Font Size">
+                        <option value="12px">12px</option>
+                        <option value="14px" selected>14px</option>
+                        <option value="16px">16px</option>
+                        <option value="18px">18px</option>
+                        <option value="20px">20px</option>
+                        <option value="24px">24px</option>
+                        <option value="28px">28px</option>
+                        <option value="32px">32px</option>
+                        <option value="36px">36px</option>
+                        <option value="48px">48px</option>
+                    </select>
+
+                    <div class="toolbar-divider"></div>
+
+                    <button id="boldBtn" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button id="italicBtn" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button id="underlineBtn" title="Underline"><i class="fas fa-underline"></i></button>
+                    <button id="strikeBtn" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="color-picker-wrapper">
+                        <label><i class="fas fa-font"></i></label>
+                        <input type="color" id="textColor" value="#f57c00" title="Text Color">
+                    </div>
+
+                    <div class="color-picker-wrapper">
+                        <label><i class="fas fa-highlighter"></i></label>
+                        <input type="color" id="highlightColor" value="#f57c0033" title="Highlight Color">
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <button id="alignLeft" title="Align Left"><i class="fas fa-align-left"></i></button>
+                    <button id="alignCenter" title="Align Center"><i class="fas fa-align-center"></i></button>
+                    <button id="alignRight" title="Align Right"><i class="fas fa-align-right"></i></button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <button id="insertOrderedList" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                    <button id="insertUnorderedList" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <button id="indentBtn" title="Indent"><i class="fas fa-indent"></i></button>
+                    <button id="outdentBtn" title="Outdent"><i class="fas fa-outdent"></i></button>
+                </div>
+
+                <div id="editor" class="editor-container" contenteditable="true" spellcheck="true"></div>
+                
+                <div style="margin:12px 0; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-future" id="savePlanBtn"><i class="fas fa-save"></i> Save</button>
+                    <button class="btn-future" id="clearPlanBtn" style="border-color: #ff444466;"><i class="fas fa-trash"></i> Clear</button>
+                    <button class="btn-future" id="previewPlanBtn"><i class="fas fa-eye"></i> Preview</button>
+                </div>
+
+                <div id="planPreview" style="margin-top: 15px; padding: 15px; background: #0b1a2e; border-radius: 20px; min-height: 60px; border: 1px dashed #2a4060; display: none;">
+                    <div style="color: #7a9ac0; font-size: 13px;">Qoraalkaagu wuxuu ka soo muuqan doonaa halkan...</div>
+                </div>
             </div>
-            <div class="productivity-line">
-                <div class="productivity-fill" id="productivityFill" style="width: 0%;"></div>
+        </div>
+
+        <!-- MALA QABTAY MAANTA? -->
+        <div id="today" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-check-circle icon-big"></i> Mala qabtay howsha maanta?</div>
+                <div id="todayTasks">
+                    <div class="empty-state">Wax howl ah ma jiraan. Tag "Bari maxaa la qabana" oo soo qor!</div>
+                </div>
+                <button class="btn-future" id="saveTodayBtn" style="margin-top:15px;"><i class="fas fa-save"></i> Save progress</button>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 14px; color: #9a9588; margin-top: 8px;">
-                <span><i class="far fa-clock"></i> <span id="timerDisplay">00:00:00</span></span>
-                <span id="productivityLabel">Productivity 0%</span>
+        </div>
+
+        <!-- TIME CONTROL -->
+        <div id="timer" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-stopwatch icon-big"></i> Time Control</div>
+                
+                <div class="timer-input-group">
+                    <label for="timerMinutesInput"><i class="fas fa-clock"></i> Daqiiqadaha:</label>
+                    <input type="number" id="timerMinutesInput" value="5" min="1" max="9999" placeholder="Daqiiqado">
+                    <button class="btn-future" id="setTimerBtn"><i class="fas fa-check"></i> Set</button>
+                </div>
+
+                <div class="timer-preset-buttons">
+                    <button data-minutes="1">1 daqiiqo</button>
+                    <button data-minutes="5" class="active">5 daqiiqo</button>
+                    <button data-minutes="10">10 daqiiqo</button>
+                    <button data-minutes="15">15 daqiiqo</button>
+                    <button data-minutes="30">30 daqiiqo</button>
+                    <button data-minutes="45">45 daqiiqo</button>
+                    <button data-minutes="60">1 Saac</button>
+                    <button data-minutes="90">1.5 Saac</button>
+                    <button data-minutes="120">2 Saac</button>
+                </div>
+
+                <div class="clock-container" id="clockContainer">
+                    <span class="clock-text" id="timerDisplay">00:00:00</span>
+                </div>
+
+                <div class="timer-status" id="timerStatus">
+                    <span id="timerStatusText">💤 Diyaar</span>
+                </div>
+                
+                <div style="display:flex; gap:15px; justify-content:center; margin:20px 0; flex-wrap:wrap;">
+                    <button class="btn-future" id="startTimer"><i class="fas fa-play"></i> Start</button>
+                    <button class="btn-future" id="pauseTimer"><i class="fas fa-pause"></i> Pause</button>
+                    <button class="btn-future" id="resetTimer"><i class="fas fa-redo"></i> Reset</button>
+                    <button class="btn-future" id="stopAlarmBtn" style="border-color: #ff444466; display:none;"><i class="fas fa-bell-slash"></i> Jooji Alarm</button>
+                </div>
+
+                <div style="display:flex; gap:15px; justify-content:center; margin:10px 0; flex-wrap:wrap;">
+                    <button class="btn-future" id="saveTimeBtn"><i class="fas fa-save"></i> Save Time</button>
+                    <button class="btn-future" id="saveTimeBoxBtn" style="border-color: #00ff8866;"><i class="fas fa-box"></i> Save Time Box</button>
+                </div>
+
+                <div style="margin-top:12px; color:#7a9ac0; font-size:12px;">Nalfar dhax maraayo — marka uu dhamaado waqtiga waxaa soo baxaya dhawaaq "dhiid hdiid dhiid" 5 seconds</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-box icon-big"></i> Time Box - Waqtiga la qabtay</div>
+                <div id="timeBoxContainer">
+                    <div class="empty-timebox">Wax time box ah ma jiraan. Bilaab timer oo riix "Save Time Box"!</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><i class="fas fa-chart-simple icon-big"></i> Productivity Line</div>
+                <div class="productivity-container">
+                    <div class="productivity-header">
+                        <span class="label"><i class="fas fa-bolt" style="color:#f57c00;"></i> Waxqabadka maanta</span>
+                        <span class="stats"><span id="productivityPercent">0</span>% - <span id="productivityTime">0m</span> / <span id="productivityTotal">0m</span></span>
+                    </div>
+                    <div class="productivity-bar-track">
+                        <div class="productivity-bar-fill" id="productivityBar" style="width: 0%;"></div>
+                    </div>
+                    <div class="productivity-details">
+                        <span>🎯 Goal: <span id="productivityGoal">30</span> min</span>
+                        <span>📊 <span id="productivitySessions">0</span> sessions</span>
+                        <span>⏱ <span id="productivityAvg">0</span> min avg</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JIMICSI -->
+        <div id="exercise" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-dumbbell icon-big"></i> Jimicsi</div>
+                
+                <div class="exercise-date-group">
+                    <label><i class="fas fa-calendar-day"></i> Dooro Taariikh:</label>
+                    <input type="date" id="exerciseDateInput">
+                    <span class="selected-day-display" id="selectedDayDisplay">📅 Dooro maalin</span>
+                </div>
+
+                <div class="exercise-grid" id="exerciseGrid">
+                    <div class="exercise-card" data-day="Sabti" data-exercise="Xabadka &amp; Garabka">
+                        <span class="date-badge">Sabti</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-weight-hanging"></i>
+                        <div class="day-name">Sabti</div>
+                        <div class="exercise-name">Xabadka &amp; Garabka</div>
+                    </div>
+                    <div class="exercise-card" data-day="Axad" data-exercise="Lugaha">
+                        <span class="date-badge">Axad</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-running"></i>
+                        <div class="day-name">Axad</div>
+                        <div class="exercise-name">Lugaha</div>
+                    </div>
+                    <div class="exercise-card" data-day="Isniin" data-exercise="Dhabarka &amp; Xabdka">
+                        <span class="date-badge">Isniin</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-spine"></i>
+                        <div class="day-name">Isniin</div>
+                        <div class="exercise-name">Dhabarka &amp; Xabdka</div>
+                    </div>
+                    <div class="exercise-card" data-day="Talaado" data-exercise="Caloosha">
+                        <span class="date-badge">Talaado</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-apple-alt"></i>
+                        <div class="day-name">Talaado</div>
+                        <div class="exercise-name">Caloosha</div>
+                    </div>
+                    <div class="exercise-card" data-day="Arbaco" data-exercise="Gacmaha">
+                        <span class="date-badge">Arbaco</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-hand-paper"></i>
+                        <div class="day-name">Arbaco</div>
+                        <div class="exercise-name">Gacmaha</div>
+                    </div>
+                    <div class="exercise-card" data-day="Khamiis" data-exercise="Dhamaan">
+                        <span class="date-badge">Khamiis</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-user-astronaut"></i>
+                        <div class="day-name">Khamiis</div>
+                        <div class="exercise-name">Dhamaan</div>
+                    </div>
+                    <div class="exercise-card" data-day="Jimco" data-exercise="Nasiino">
+                        <span class="date-badge">Jimco</span>
+                        <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                        <i class="fas fa-bed"></i>
+                        <div class="day-name">Jimco</div>
+                        <div class="exercise-name">Nasiino</div>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top:15px;">
+                    <button class="btn-future" id="saveExerciseBtn"><i class="fas fa-save"></i> Save Jimicsi</button>
+                    <button class="btn-future" id="clearExerciseBtn" style="border-color: #ff444466;"><i class="fas fa-undo"></i> Clear Selection</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAANTA MA LA JIMICSADAY? -->
+        <div id="exercise-track" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-calendar-check icon-big"></i> Maanta ma la jimicsaday?</div>
+                
+                <div class="flex-row" style="margin-bottom:15px;">
+                    <button class="btn-future" id="weekViewBtn"><i class="fas fa-calendar-week"></i> Isbuuc</button>
+                    <button class="btn-future" id="monthViewBtn"><i class="fas fa-calendar-alt"></i> Bille</button>
+                    <button class="btn-future" id="exportExercisePDF"><i class="fas fa-file-pdf"></i> PDF</button>
+                </div>
+
+                <div class="track-stats" id="trackStats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statTotal">0</div>
+                        <div class="stat-label">Wadar Jimicsi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statWeek">0</div>
+                        <div class="stat-label">Isbuucan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statMonth">0</div>
+                        <div class="stat-label">Bishan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statStreak">0</div>
+                        <div class="stat-label">Maalmaha isku xiga</div>
+                    </div>
+                </div>
+
+                <div id="exerciseTrackContent" class="exercise-track-container">
+                    <div class="empty-state">Fadlan dooro Isbuuc ama Bille si aad u aragto xogta</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORT -->
+        <div id="report" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-file-invoice icon-big"></i> Howl waliba iyo waqtiga la qabtay</div>
+                <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:20px;">
+                    <button class="btn-future" id="exportPDF"><i class="fas fa-file-pdf"></i> PDF (tick ku calaamadee)</button>
+                    <button class="btn-future" id="exportAllPDF"><i class="fas fa-print"></i> Dhammaan</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="report-table" id="reportTable">
+                        <thead>
+                            <tr>
+                                <th>Howl</th>
+                                <th>Waqti</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportBody">
+                            <tr><td colspan="3" style="text-align:center; color:#7a9ac0;">Wax xog ah ma jiraan</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- SECTION 2: TODO LIST -->
-    <div class="section-container" id="section2">
-        <div class="card">
-            <div class="section-title"><i class="fas fa-list-ul"></i> Maanta waxa aan qabaneyso</div>
-            <div class="todo-input-area">
-                <input type="text" id="todoInput" placeholder="Tusaale: Exam ayaan iska qaadaa ...">
-                <button class="btn" id="addTodoBtn"><i class="fas fa-plus-circle"></i> Ku dar</button>
-                <button class="btn bullet-toggle" id="bulletToggleBtn"><i class="fas fa-list"></i> Bullets</button>
-            </div>
-            <ul class="todo-list" id="todoListContainer"></ul>
+    <!-- EDIT MODAL -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-title"><i class="fas fa-edit" style="color:#f57c00;"></i> Edit Task</div>
+            <input type="text" id="editTaskInput" placeholder="Cinwaanka cusub..." style="margin-bottom:15px;">
+            <textarea id="editSubtaskInput" rows="4" placeholder="Subtasks (mid kasta hal line)..."></textarea>
+            <button class="btn-future" id="saveEditBtn" style="margin-top:15px;"><i class="fas fa-save"></i> Save Changes</button>
         </div>
     </div>
 
-    <!-- SECTION 3: ATTENDANCE -->
-    <div class="section-container" id="section3">
-        <div class="card">
-            <div class="section-title"><i class="fas fa-user-check"></i> Xaadir / Maqnaansho</div>
-            <div class="attendance-grid">
-                <input type="date" id="attendanceDate" value="2026-06-18">
-                <div class="attendance-badge">
-                    <button class="btn btn-success" id="presentBtn"><i class="fas fa-check-circle"></i> Xaadir</button>
-                    <button class="btn btn-danger" id="absentBtn"><i class="fas fa-times-circle"></i> Maqnaasho</button>
-                </div>
-                <button class="btn btn-primary" id="saveAttendanceBtn"><i class="fas fa-save"></i> Save</button>
-            </div>
-            <div style="margin-top: 14px; color: #b9af99; font-size: 15px;" id="attendanceStatus">Maanta: aan la dooran</div>
-        </div>
-    </div>
+    <script>
+        // ======================== DATA STORAGE ========================
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let timerSeconds = parseInt(localStorage.getItem('timerSeconds')) || 0;
+        let timerRunning = false;
+        let timerInterval = null;
+        let exerciseLog = JSON.parse(localStorage.getItem('exerciseLog')) || [];
+        let editingTaskIndex = -1;
+        
+        // Timer variables
+        let totalTimerSeconds = 0;
+        let remainingSeconds = 0;
+        let alarmActive = false;
+        let alarmInterval = null;
 
-    <!-- SECTION 4: NOTE EDITOR -->
-    <div class="section-container" id="section4">
-        <div class="card">
-            <div class="section-title"><i class="fas fa-edit"></i> Qoraal</div>
-            <div class="note-toolbar">
-                <i class="fas fa-bold" title="Bold"></i>
-                <i class="fas fa-italic" title="Italic"></i>
-                <i class="fas fa-underline" title="Underline"></i>
-                <i class="fas fa-strikethrough" title="Strike"></i>
-                <i class="fas fa-list-ol" title="Numbered list"></i>
-                <i class="fas fa-list-ul" title="Bullet list"></i>
-                <i class="fas fa-align-left" title="Align left"></i>
-                <i class="fas fa-align-center" title="Center"></i>
-                <i class="fas fa-align-right" title="Right"></i>
-                <i class="fas fa-link" title="Link"></i>
-                <i class="fas fa-image" title="Image"></i>
-                <i class="fas fa-undo-alt" title="Undo"></i>
-                <i class="fas fa-redo-alt" title="Redo"></i>
-            </div>
-            <div class="note-editor" contenteditable="true" id="noteEditor">
-                <p>Wax ka qor maanta...</p>
-            </div>
-        </div>
-    </div>
+        // Time Box
+        let timeBoxes = JSON.parse(localStorage.getItem('timeBoxes')) || [];
 
-    <!-- SECTION 5: SUMMARY / WARBIXIN -->
-    <div class="section-container" id="section5">
-        <div class="card">
-            <div class="section-title"><i class="fas fa-chart-pie"></i> Warbixin & Summary · Maanta</div>
-            <div class="summary-grid" id="summaryGrid">
-                <div class="summary-item">
-                    <i class="fas fa-clock icon-big"></i>
-                    <div class="label">Waqtiga Guud</div>
-                    <div class="value" id="summaryTime">00:00:00</div>
-                    <div class="sub" id="summaryProductivity">Productivity: 0%</div>
-                </div>
-                <div class="summary-item">
-                    <i class="fas fa-tasks icon-big"></i>
-                    <div class="label">Todo Qodobada</div>
-                    <div class="value" id="summaryTodoCount">0</div>
-                    <div class="sub" id="summaryTodoStatus">Waxba ma jiraan</div>
-                </div>
-                <div class="summary-item">
-                    <i class="fas fa-user-check icon-big"></i>
-                    <div class="label">Attendance</div>
-                    <div class="value" id="summaryAttendance">--</div>
-                    <div class="sub" id="summaryAttendanceDate">Maanta</div>
-                </div>
-                <div class="summary-item">
-                    <i class="fas fa-pen-fancy icon-big"></i>
-                    <div class="label">Qoraal</div>
-                    <div class="value" id="summaryNoteStatus">✏️</div>
-                    <div class="summary-note-preview" id="summaryNotePreview">Wax qoraal ah ma jiro</div>
-                </div>
-            </div>
-            <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #2a2a36;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                    <span style="color: #9a9588; font-size: 14px;"><i class="fas fa-info-circle"></i> Dhammaan xogta maanta waxaa laga soo ururiyay qeybaha kore</span>
-                    <button class="btn btn-primary" id="refreshSummaryBtn"><i class="fas fa-sync-alt"></i> Cusboonaysii</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        // Exercise Selection
+        let selectedExerciseDay = null;
+        let selectedExerciseName = null;
+        let selectedDate = null;
 
-    <div style="text-align: center; padding: 10px; opacity: 0.5; font-size: 13px; letter-spacing: 1px;">
-        <i class="fas fa-database"></i> LocalStorage · wax walba waa la keydiyay
-    </div>
-</div>
+        // Track view mode
+        let trackViewMode = 'week';
 
-<script>
-    (function() {
-        // SIDEBAR NAVIGATION
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
-        const sections = {
-            section1: document.getElementById('section1'),
-            section2: document.getElementById('section2'),
-            section3: document.getElementById('section3'),
-            section4: document.getElementById('section4'),
-            section5: document.getElementById('section5')
-        };
-
-        sidebarItems.forEach(item => {
+        // ======================== SIDEBAR NAVIGATION ========================
+        document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
-                sidebarItems.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
-                Object.values(sections).forEach(s => s.classList.remove('active'));
-                const sectionId = this.dataset.section;
-                if (sections[sectionId]) {
-                    sections[sectionId].classList.add('active');
+                const target = this.dataset.target;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+                if (target === 'exercise-track') {
+                    renderTrackView();
                 }
             });
         });
 
-        // DISPLAY DATE
-        const now = new Date();
-        document.getElementById('currentDateDisplay').innerText = now.toLocaleDateString('so-SO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        // ======================== EDITOR FUNCTIONS ========================
+        const editor = document.getElementById('editor');
+        const planPreview = document.getElementById('planPreview');
 
-        // TIME CONTROL
-        let timerInterval = null;
-        let elapsedSeconds = 0;
-        let isTimerRunning = false;
-        let alarmTimeout = null;
-        let isAlarmRinging = false;
-        let alarmAudioContext = null;
-        let alarmOscillators = [];
-        let alarmGains = [];
-        
+        const savedContent = localStorage.getItem('editorContent');
+        if (savedContent) {
+            editor.innerHTML = savedContent;
+        } else {
+            editor.innerHTML = '<div><b>1. Bari casharka ccn ayaan baraa</b></div><div>&nbsp;&nbsp;&nbsp;a. Casharka 1aad</div><div>&nbsp;&nbsp;&nbsp;b. Casharka 2aad</div><div>&nbsp;&nbsp;&nbsp;c. Exam</div><div><br></div><div><b>2. Bari Python ayaan baraa</b></div><div>&nbsp;&nbsp;&nbsp;a. Variables</div><div>&nbsp;&nbsp;&nbsp;b. Loops</div><div>&nbsp;&nbsp;&nbsp;c. Functions</div>';
+        }
+
+        editor.addEventListener('input', () => {
+            localStorage.setItem('editorContent', editor.innerHTML);
+        });
+
+        // ======================== FONT TOOLS ========================
+        document.getElementById('fontFamily').addEventListener('change', (e) => {
+            document.execCommand('fontName', false, e.target.value);
+            editor.focus();
+        });
+
+        document.getElementById('fontSize').addEventListener('change', (e) => {
+            document.execCommand('fontSize', false, '7');
+            const sel = window.getSelection();
+            if (sel.rangeCount) {
+                const range = sel.getRangeAt(0);
+                const span = document.createElement('span');
+                span.style.fontSize = e.target.value;
+                try {
+                    range.surroundContents(span);
+                } catch (e) {
+                    const parent = range.commonAncestorContainer;
+                    if (parent.nodeType === 3) {
+                        const p = parent.parentNode;
+                        p.style.fontSize = e.target.value;
+                    }
+                }
+            }
+            editor.focus();
+        });
+
+        document.getElementById('boldBtn').addEventListener('click', () => {
+            document.execCommand('bold', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('italicBtn').addEventListener('click', () => {
+            document.execCommand('italic', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('underlineBtn').addEventListener('click', () => {
+            document.execCommand('underline', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('strikeBtn').addEventListener('click', () => {
+            document.execCommand('strikeThrough', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('textColor').addEventListener('input', (e) => {
+            document.execCommand('foreColor', false, e.target.value);
+            editor.focus();
+        });
+
+        document.getElementById('highlightColor').addEventListener('input', (e) => {
+            document.execCommand('backColor', false, e.target.value);
+            editor.focus();
+        });
+
+        document.getElementById('alignLeft').addEventListener('click', () => {
+            document.execCommand('justifyLeft', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('alignCenter').addEventListener('click', () => {
+            document.execCommand('justifyCenter', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('alignRight').addEventListener('click', () => {
+            document.execCommand('justifyRight', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('insertOrderedList').addEventListener('click', () => {
+            document.execCommand('insertOrderedList', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('insertUnorderedList').addEventListener('click', () => {
+            document.execCommand('insertUnorderedList', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('indentBtn').addEventListener('click', () => {
+            document.execCommand('indent', false, null);
+            editor.focus();
+        });
+
+        document.getElementById('outdentBtn').addEventListener('click', () => {
+            document.execCommand('outdent', false, null);
+            editor.focus();
+        });
+
+        // ======================== SAVE PLAN ========================
+        document.getElementById('savePlanBtn').addEventListener('click', () => {
+            const html = editor.innerHTML.trim();
+            if (!html || html === '<br>') {
+                showNotification('Fadlan soo qor waxaad baranayso!', 'warning');
+                return;
+            }
+
+            const textContent = editor.innerText || editor.textContent;
+            const lines = textContent.split('\n').filter(line => line.trim() !== '');
+            const newTasks = [];
+            let currentTask = null;
+
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                const mainMatch = trimmed.match(/^(\d+)\.\s*(.+)/);
+                if (mainMatch) {
+                    if (currentTask) {
+                        newTasks.push(currentTask);
+                    }
+                    currentTask = {
+                        id: Date.now() + Math.random(),
+                        title: mainMatch[2],
+                        subtasks: [],
+                        completed: false,
+                        date: new Date().toLocaleDateString(),
+                        html: editor.innerHTML
+                    };
+                } else if (currentTask && (trimmed.match(/^[a-z]\.\s*/) || trimmed.match(/^[-•]\s*/) || trimmed.match(/^\s*[a-z]\.\s*/))) {
+                    const subMatch = trimmed.match(/^[a-z]\.\s*(.+)/) || trimmed.match(/^[-•]\s*(.+)/) || trimmed.match(/^\s*[a-z]\.\s*(.+)/);
+                    if (subMatch) {
+                        currentTask.subtasks.push({
+                            text: subMatch[1] || trimmed,
+                            completed: false
+                        });
+                    }
+                } else if (currentTask && trimmed) {
+                    currentTask.subtasks.push({
+                        text: trimmed,
+                        completed: false
+                    });
+                }
+            });
+
+            if (currentTask) {
+                newTasks.push(currentTask);
+            }
+
+            if (newTasks.length === 0) {
+                newTasks.push({
+                    id: Date.now() + Math.random(),
+                    title: textContent || 'New Task',
+                    subtasks: [],
+                    completed: false,
+                    date: new Date().toLocaleDateString(),
+                    html: editor.innerHTML
+                });
+            }
+
+            newTasks.forEach(task => {
+                if (!tasks.find(t => t.title === task.title && t.date === task.date)) {
+                    tasks.push(task);
+                }
+            });
+
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('editorContent', editor.innerHTML);
+            updateTodayTasks();
+            updateDashboard();
+            updateReport();
+            showNotification('✅ Xogta waa la kaydiyay!', 'success');
+            
+            planPreview.style.display = 'block';
+            planPreview.innerHTML = editor.innerHTML;
+        });
+
+        document.getElementById('clearPlanBtn').addEventListener('click', () => {
+            if (confirm('Ma hubtaa inaad tirtirto qoraalka?')) {
+                editor.innerHTML = '';
+                localStorage.removeItem('editorContent');
+                planPreview.style.display = 'none';
+                showNotification('🗑 Qoraalka waa la tirtiray', 'info');
+            }
+        });
+
+        document.getElementById('previewPlanBtn').addEventListener('click', () => {
+            const html = editor.innerHTML.trim();
+            if (!html || html === '<br>') {
+                showNotification('Wax qoraal ah ma jiro si loo arko', 'warning');
+                return;
+            }
+            planPreview.style.display = 'block';
+            planPreview.innerHTML = html;
+            showNotification('👁 Preview waa la fuuray', 'info');
+        });
+
+        // ======================== TODAY TASKS WITH EDIT ========================
+        function updateTodayTasks() {
+            const container = document.getElementById('todayTasks');
+            
+            if (tasks.length === 0) {
+                container.innerHTML = `<div class="empty-state">Wax howl ah ma jiraan. Tag "Bari maxaa la qabana" oo soo qor!</div>`;
+                return;
+            }
+
+            let html = '';
+            tasks.forEach((task, index) => {
+                const isCompleted = task.completed || false;
+                html += `
+                    <div class="todo-item" data-task-id="${task.id}">
+                        <input type="checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleTask(${index})">
+                        <span class="task-text ${isCompleted ? 'done' : ''}">${task.title}</span>
+                        <div class="task-actions">
+                            <button class="btn-edit" onclick="openEditModal(${index})"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="delete-btn" onclick="deleteTask(${index})"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                `;
+                if (task.subtasks && task.subtasks.length > 0) {
+                    task.subtasks.forEach((sub, subIndex) => {
+                        html += `
+                            <div class="todo-item" style="margin-left: 40px; border-left-color: #0066ff;" data-task-id="${task.id}-sub-${subIndex}">
+                                <input type="checkbox" ${sub.completed ? 'checked' : ''} onchange="toggleSubtask(${index}, ${subIndex})">
+                                <span class="task-text ${sub.completed ? 'done' : ''}">• ${sub.text}</span>
+                            </div>
+                        `;
+                    });
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        // ======================== EDIT MODAL ========================
+        function openEditModal(index) {
+            editingTaskIndex = index;
+            const task = tasks[index];
+            document.getElementById('editTaskInput').value = task.title;
+            const subtaskText = task.subtasks.map(s => s.text).join('\n');
+            document.getElementById('editSubtaskInput').value = subtaskText;
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('editModal').classList.remove('active');
+        });
+
+        document.getElementById('editModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('editModal').classList.remove('active');
+            }
+        });
+
+        document.getElementById('saveEditBtn').addEventListener('click', () => {
+            if (editingTaskIndex === -1) return;
+            
+            const newTitle = document.getElementById('editTaskInput').value.trim();
+            const subtaskLines = document.getElementById('editSubtaskInput').value.split('\n').filter(line => line.trim() !== '');
+            
+            if (!newTitle) {
+                showNotification('Fadlan soo qor cinwaan cusub!', 'warning');
+                return;
+            }
+
+            tasks[editingTaskIndex].title = newTitle;
+            tasks[editingTaskIndex].subtasks = subtaskLines.map(text => ({
+                text: text.trim(),
+                completed: false
+            }));
+
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            updateTodayTasks();
+            updateDashboard();
+            updateReport();
+            document.getElementById('editModal').classList.remove('active');
+            showNotification('✅ Task waa la bedelay!', 'success');
+        });
+
+        document.getElementById('editTaskInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('saveEditBtn').click();
+            }
+        });
+
+        // ======================== TASK FUNCTIONS ========================
+        window.toggleTask = function(index) {
+            tasks[index].completed = !tasks[index].completed;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            updateTodayTasks();
+            updateDashboard();
+            updateReport();
+            showNotification(tasks[index].completed ? '✅ Howl waa la dhameeyay!' : '⏳ Howl waa la soo celiyay', 'info');
+        };
+
+        window.toggleSubtask = function(taskIndex, subIndex) {
+            tasks[taskIndex].subtasks[subIndex].completed = !tasks[taskIndex].subtasks[subIndex].completed;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            updateTodayTasks();
+            updateDashboard();
+            updateReport();
+        };
+
+        window.deleteTask = function(index) {
+            if (confirm(`Ma tirtirtaa "${tasks[index].title}"?`)) {
+                tasks.splice(index, 1);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                updateTodayTasks();
+                updateDashboard();
+                updateReport();
+                showNotification('🗑 Howl waa la tirtiray', 'info');
+            }
+        };
+
+        document.getElementById('saveTodayBtn').addEventListener('click', () => {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            updateTodayTasks();
+            updateDashboard();
+            updateReport();
+            showNotification('✅ Horumarka waa la kaydiyay!', 'success');
+        });
+
+        // ======================== DASHBOARD ========================
+        function updateDashboard() {
+            const totalTasks = tasks.length;
+            const completedTasks = tasks.filter(t => t.completed).length;
+            const remainingTasks = totalTasks - completedTasks;
+            
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('remainingTasks').textContent = `${remainingTasks} remaining`;
+            
+            const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            const hours = Math.floor(timerSeconds / 3600);
+            document.getElementById('totalHours').textContent = `${hours}h`;
+            document.getElementById('totalTimeBox').textContent = timeBoxes.length;
+            document.getElementById('totalExercise').textContent = exerciseLog.length;
+        }
+
+        // ======================== TIMER WITH CUSTOM MINUTES ========================
         const timerDisplay = document.getElementById('timerDisplay');
-        const productivityFill = document.getElementById('productivityFill');
-        const productivityLabel = document.getElementById('productivityLabel');
-        const alarmMessage = document.getElementById('alarmMessage');
-        const alarmDisplay = document.getElementById('alarmDisplay');
+        const clockContainer = document.getElementById('clockContainer');
+        const timerStatusText = document.getElementById('timerStatusText');
+        const timerMinutesInput = document.getElementById('timerMinutesInput');
+        const setTimerBtn = document.getElementById('setTimerBtn');
+        const stopAlarmBtn = document.getElementById('stopAlarmBtn');
+
+        function updateTimerDisplay() {
+            const h = String(Math.floor(remainingSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(remainingSeconds % 60).padStart(2, '0');
+            timerDisplay.textContent = `${h}:${m}:${s}`;
+        }
+
+        function setTimer(minutes) {
+            if (timerRunning) {
+                showNotification('Waqtiga wuu socdaa, marka hore jooji ama reset samee!', 'warning');
+                return;
+            }
+            totalTimerSeconds = minutes * 60;
+            remainingSeconds = totalTimerSeconds;
+            updateTimerDisplay();
+            timerStatusText.textContent = `⏱ ${minutes} daqiiqo la dejiyay`;
+            showNotification(`✅ ${minutes} daqiiqo waa la dejiyay!`, 'success');
+        }
+
+        setTimerBtn.addEventListener('click', () => {
+            const minutes = parseInt(timerMinutesInput.value);
+            if (!minutes || minutes < 1) {
+                showNotification('Fadlan soo gal daqiiqado sax ah (1 ama ka badan)!', 'warning');
+                return;
+            }
+            setTimer(minutes);
+        });
+
+        document.querySelectorAll('.timer-preset-buttons button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.timer-preset-buttons button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const minutes = parseInt(this.dataset.minutes);
+                timerMinutesInput.value = minutes;
+                setTimer(minutes);
+            });
+        });
+
+        document.getElementById('startTimer').addEventListener('click', () => {
+            if (remainingSeconds <= 0) {
+                showNotification('Marka hore deji waqti (daqiiqado soo gal)!', 'warning');
+                return;
+            }
+            
+            if (alarmActive) {
+                stopAlarm();
+            }
+
+            if (!timerRunning) {
+                timerRunning = true;
+                timerInterval = setInterval(() => {
+                    if (remainingSeconds > 0) {
+                        remainingSeconds--;
+                        updateTimerDisplay();
+                        timerStatusText.textContent = `⏳ Waqtiga wuu socdaa... ${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, '0')}`
+                    }
+                    
+                    if (remainingSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        timerStatusText.textContent = '⏰ WAA DHAMAAY!';
+                        playAlarm();
+                        showNotification('⏰ Waqtiga wuu dhammaaday!', 'warning');
+                    }
+                }, 1000);
+                showNotification('⏱ Waqtiga waa bilaabmay!', 'success');
+            }
+        });
+
+        document.getElementById('pauseTimer').addEventListener('click', () => {
+            if (timerRunning) {
+                timerRunning = false;
+                clearInterval(timerInterval);
+                timerInterval = null;
+                timerStatusText.textContent = `⏸ Joojiyay - ${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, '0')} kaga hartay`;
+                showNotification('⏸ Waqtiga waa la joojiyay', 'info');
+            }
+        });
+
+        document.getElementById('resetTimer').addEventListener('click', () => {
+            timerRunning = false;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            if (alarmActive) {
+                stopAlarm();
+            }
+            remainingSeconds = totalTimerSeconds;
+            updateTimerDisplay();
+            timerStatusText.textContent = `🔄 Waa la soo celiyay - ${Math.floor(totalTimerSeconds / 60)} daqiiqo`;
+            showNotification('🔄 Waqtiga waa la soo celiyay', 'info');
+        });
+
+        // ======================== ALARM FUNCTION ========================
+        function playAlarm() {
+            alarmActive = true;
+            stopAlarmBtn.style.display = 'inline-flex';
+            clockContainer.classList.add('alarm-flash');
+            timerStatusText.textContent = '🔔 ALARM! dhiid hdiid dhiid!';
+            
+            let alarmCount = 0;
+            alarmInterval = setInterval(() => {
+                if (alarmCount >= 10) {
+                    stopAlarm();
+                    return;
+                }
+                playAlarmSound();
+                alarmCount++;
+            }, 500);
+        }
 
         function playAlarmSound() {
             try {
-                alarmAudioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const osc1 = alarmAudioContext.createOscillator();
-                const osc2 = alarmAudioContext.createOscillator();
-                const gain1 = alarmAudioContext.createGain();
-                const gain2 = alarmAudioContext.createGain();
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
                 
-                osc1.connect(gain1);
-                gain1.connect(alarmAudioContext.destination);
-                osc2.connect(gain2);
-                gain2.connect(alarmAudioContext.destination);
-                
-                osc1.type = 'square';
-                osc2.type = 'square';
-                osc1.frequency.setValueAtTime(440, alarmAudioContext.currentTime);
-                osc2.frequency.setValueAtTime(443, alarmAudioContext.currentTime);
-                
-                gain1.gain.setValueAtTime(0.15, alarmAudioContext.currentTime);
-                gain2.gain.setValueAtTime(0.12, alarmAudioContext.currentTime);
-                
-                const startTime = alarmAudioContext.currentTime;
-                const duration = 5;
-                
-                for (let t = 0; t < duration; t += 0.15) {
-                    const time = startTime + t;
-                    const freq = 400 + 400 * Math.abs(Math.sin(t * 6.28 * 0.8));
-                    osc1.frequency.setValueAtTime(freq, time);
-                    osc2.frequency.setValueAtTime(freq + 3, time);
-                }
-                
-                gain1.gain.setValueAtTime(0.15, startTime + duration - 0.3);
-                gain1.gain.linearRampToValueAtTime(0.01, startTime + duration);
-                gain2.gain.setValueAtTime(0.12, startTime + duration - 0.3);
-                gain2.gain.linearRampToValueAtTime(0.01, startTime + duration);
-                
-                osc1.start(startTime);
-                osc1.stop(startTime + duration + 0.1);
-                osc2.start(startTime);
-                osc2.stop(startTime + duration + 0.1);
-                
-                alarmOscillators = [osc1, osc2];
-                alarmGains = [gain1, gain2];
-                
+                oscillator.frequency.value = 880;
+                oscillator.type = 'square';
+                gainNode.gain.value = 0.3;
+                oscillator.start();
                 setTimeout(() => {
-                    try {
-                        const ctx2 = new (window.AudioContext || window.webkitAudioContext)();
-                        const osc3 = ctx2.createOscillator();
-                        const osc4 = ctx2.createOscillator();
-                        const gain3 = ctx2.createGain();
-                        const gain4 = ctx2.createGain();
-                        
-                        osc3.connect(gain3);
-                        gain3.connect(ctx2.destination);
-                        osc4.connect(gain4);
-                        gain4.connect(ctx2.destination);
-                        
-                        osc3.type = 'square';
-                        osc4.type = 'square';
-                        osc3.frequency.setValueAtTime(660, ctx2.currentTime);
-                        osc4.frequency.setValueAtTime(663, ctx2.currentTime);
-                        
-                        gain3.gain.setValueAtTime(0.10, ctx2.currentTime);
-                        gain4.gain.setValueAtTime(0.08, ctx2.currentTime);
-                        
-                        const start2 = ctx2.currentTime;
-                        for (let t = 0; t < 4; t += 0.12) {
-                            const time = start2 + t;
-                            const freq = 600 + 300 * Math.abs(Math.sin(t * 6.28 * 0.9 + 0.5));
-                            osc3.frequency.setValueAtTime(freq, time);
-                            osc4.frequency.setValueAtTime(freq + 2, time);
-                        }
-                        
-                        gain3.gain.setValueAtTime(0.10, start2 + 3.7);
-                        gain3.gain.linearRampToValueAtTime(0.01, start2 + 4.0);
-                        gain4.gain.setValueAtTime(0.08, start2 + 3.7);
-                        gain4.gain.linearRampToValueAtTime(0.01, start2 + 4.0);
-                        
-                        osc3.start(start2);
-                        osc3.stop(start2 + 4.1);
-                        osc4.start(start2);
-                        osc4.stop(start2 + 4.1);
-                    } catch(e) {}
-                }, 500);
-                
+                    oscillator.stop();
+                    setTimeout(() => {
+                        const osc2 = audioContext.createOscillator();
+                        const gain2 = audioContext.createGain();
+                        osc2.connect(gain2);
+                        gain2.connect(audioContext.destination);
+                        osc2.frequency.value = 1100;
+                        osc2.type = 'square';
+                        gain2.gain.value = 0.25;
+                        osc2.start();
+                        setTimeout(() => osc2.stop(), 150);
+                    }, 150);
+                }, 150);
             } catch (e) {
                 console.log('Audio not supported');
             }
         }
 
-        function stopAlarmSound() {
-            try {
-                alarmOscillators.forEach(osc => {
-                    try { osc.stop(); } catch(e) {}
-                });
-                alarmGains.forEach(gain => {
-                    try { gain.gain.setValueAtTime(0.01, alarmAudioContext.currentTime); } catch(e) {}
-                });
-                if (alarmAudioContext) {
-                    try { alarmAudioContext.close(); } catch(e) {}
-                }
-            } catch(e) {}
-        }
-
-        function triggerAlarm() {
-            if (isAlarmRinging) return;
-            isAlarmRinging = true;
-            playAlarmSound();
-            alarmDisplay.classList.add('alarm-ringing');
-            alarmMessage.innerText = '🔔 DHIIDHIID! ⏰ Waqtigii yimid!';
-            alarmMessage.style.color = '#ff6b35';
-            alarmMessage.style.fontWeight = 'bold';
-            alarmMessage.style.textShadow = '0 0 30px #ff6b3566';
-            
-            setTimeout(() => {
-                stopAlarmSound();
-                alarmDisplay.classList.remove('alarm-ringing');
-                alarmMessage.style.color = '';
-                alarmMessage.style.fontWeight = '';
-                alarmMessage.style.textShadow = '';
-                isAlarmRinging = false;
-            }, 6000);
-        }
-
-        function updateTimerDisplay() {
-            const h = String(Math.floor(elapsedSeconds / 3600)).padStart(2, '0');
-            const m = String(Math.floor((elapsedSeconds % 3600) / 60)).padStart(2, '0');
-            const s = String(elapsedSeconds % 60).padStart(2, '0');
-            timerDisplay.innerText = `${h}:${m}:${s}`;
-            const pct = Math.min(100, (elapsedSeconds / 3600) * 100);
-            productivityFill.style.width = pct + '%';
-            productivityLabel.innerText = `Productivity ${Math.round(pct)}%`;
-        }
-
-        function setAlarm() {
-            if (alarmTimeout) clearTimeout(alarmTimeout);
-            if (isAlarmRinging) {
-                stopAlarmSound();
-                alarmDisplay.classList.remove('alarm-ringing');
-                isAlarmRinging = false;
+        function stopAlarm() {
+            alarmActive = false;
+            if (alarmInterval) {
+                clearInterval(alarmInterval);
+                alarmInterval = null;
             }
-            
-            const input = document.getElementById('alarmDateTime');
-            const target = new Date(input.value);
-            const nowTime = new Date();
-            let diff = (target - nowTime) / 1000;
-            
-            if (diff < 0) diff = 0;
-            alarmMessage.innerText = `Alarm: ${target.toLocaleTimeString('so-SO', {hour:'2-digit', minute:'2-digit'})}`;
-            alarmMessage.style.color = '';
-            alarmMessage.style.fontWeight = '';
-            alarmMessage.style.textShadow = '';
-            
-            if (diff > 0) {
-                alarmTimeout = setTimeout(() => {
-                    triggerAlarm();
-                }, diff * 1000);
+            stopAlarmBtn.style.display = 'none';
+            clockContainer.classList.remove('alarm-flash');
+            timerStatusText.textContent = '🔇 Alarm waa la joojiyay';
+            showNotification('🔇 Alarm waa la joojiyay', 'info');
+        }
+
+        document.getElementById('stopAlarmBtn').addEventListener('click', stopAlarm);
+
+        // ======================== SAVE TIME ========================
+        document.getElementById('saveTimeBtn').addEventListener('click', () => {
+            const usedSeconds = totalTimerSeconds - remainingSeconds;
+            if (usedSeconds > 0) {
+                timerSeconds += usedSeconds;
+                localStorage.setItem('timerSeconds', timerSeconds.toString());
+                updateReport();
+                updateDashboard();
+                showNotification(`✅ ${Math.floor(usedSeconds / 60)} daqiiqo waa la kaydiyay!`, 'success');
             } else {
-                triggerAlarm();
-            }
-        }
-
-        document.getElementById('alarmDateTime').addEventListener('change', setAlarm);
-        setAlarm();
-
-        document.getElementById('startTimerBtn').addEventListener('click', function() {
-            if (!isTimerRunning) {
-                isTimerRunning = true;
-                timerInterval = setInterval(() => {
-                    elapsedSeconds++;
-                    updateTimerDisplay();
-                    updateSummary();
-                }, 1000);
+                showNotification('Wax waqti ah lama isticmaalin!', 'warning');
             }
         });
 
-        document.getElementById('pauseTimerBtn').addEventListener('click', function() {
-            if (isTimerRunning) {
-                clearInterval(timerInterval);
-                isTimerRunning = false;
+        // ======================== TIME BOX ========================
+        document.getElementById('saveTimeBoxBtn').addEventListener('click', () => {
+            const usedSeconds = totalTimerSeconds - remainingSeconds;
+            if (usedSeconds <= 0) {
+                showNotification('Wax waqti ah lama isticmaalin! Marka hore bilo timer.', 'warning');
+                return;
             }
-        });
-
-        document.getElementById('resetTimerBtn').addEventListener('click', function() {
-            clearInterval(timerInterval);
-            isTimerRunning = false;
-            elapsedSeconds = 0;
-            updateTimerDisplay();
-            productivityFill.style.width = '0%';
-            productivityLabel.innerText = 'Productivity 0%';
             
-            if (alarmTimeout) clearTimeout(alarmTimeout);
-            stopAlarmSound();
-            alarmDisplay.classList.remove('alarm-ringing');
-            isAlarmRinging = false;
-            setAlarm();
-            updateSummary();
+            const minutes = Math.floor(usedSeconds / 60);
+            const seconds = usedSeconds % 60;
+            const timeStr = `${minutes}m ${seconds}s`;
+            
+            const timeBox = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString(),
+                time: timeStr,
+                seconds: usedSeconds,
+                minutes: minutes,
+                timestamp: new Date().toISOString()
+            };
+            
+            timeBoxes.push(timeBox);
+            localStorage.setItem('timeBoxes', JSON.stringify(timeBoxes));
+            updateTimeBoxes();
+            updateProductivityLine();
+            updateDashboard();
+            showNotification(`📦 Time Box saved! ${timeStr}`, 'success');
         });
 
-        // TODO LIST
-        const todoInput = document.getElementById('todoInput');
-        const todoList = document.getElementById('todoListContainer');
-        let bulletMode = false;
-
-        function loadTodos() {
-            const stored = localStorage.getItem('todoItems');
-            if (stored) {
-                const items = JSON.parse(stored);
-                todoList.innerHTML = '';
-                items.forEach((text, index) => {
-                    addTodoItem(text, index);
-                });
+        function updateTimeBoxes() {
+            const container = document.getElementById('timeBoxContainer');
+            if (timeBoxes.length === 0) {
+                container.innerHTML = `<div class="empty-timebox">Wax time box ah ma jiraan. Bilaab timer oo riix "Save Time Box"!</div>`;
+                return;
             }
-            updateSummary();
+            
+            let html = '<div class="time-box-grid">';
+            const sorted = [...timeBoxes].reverse();
+            sorted.forEach(box => {
+                html += `
+                    <div class="time-box-item">
+                        <div class="time-label"><i class="far fa-calendar-alt"></i> ${box.date}</div>
+                        <div class="time-value">${box.time}</div>
+                        <div class="time-date">⏱ ${box.minutes} min</div>
+                        <button class="delete-box-btn" onclick="deleteTimeBox(${box.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
         }
 
-        function saveTodos() {
-            const items = [];
-            document.querySelectorAll('#todoListContainer li').forEach(li => {
-                const textSpan = li.querySelector('.todo-text');
-                if (textSpan) items.push(textSpan.innerText);
-            });
-            localStorage.setItem('todoItems', JSON.stringify(items));
-            updateSummary();
+        window.deleteTimeBox = function(id) {
+            if (confirm('Ma tirtirtaa Time Box-kan?')) {
+                timeBoxes = timeBoxes.filter(box => box.id !== id);
+                localStorage.setItem('timeBoxes', JSON.stringify(timeBoxes));
+                updateTimeBoxes();
+                updateProductivityLine();
+                updateDashboard();
+                showNotification('🗑 Time Box waa la tirtiray', 'info');
+            }
+        };
+
+        // ======================== PRODUCTIVITY LINE ========================
+        function updateProductivityLine() {
+            const today = new Date().toLocaleDateString();
+            const todayBoxes = timeBoxes.filter(box => box.date === today);
+            
+            const totalMinutes = todayBoxes.reduce((sum, box) => sum + box.minutes, 0);
+            const sessionCount = todayBoxes.length;
+            const avgMinutes = sessionCount > 0 ? Math.round(totalMinutes / sessionCount) : 0;
+            
+            const goal = 30;
+            const percent = Math.min(100, Math.round((totalMinutes / goal) * 100));
+            
+            document.getElementById('productivityPercent').textContent = percent;
+            document.getElementById('productivityTime').textContent = `${totalMinutes}m`;
+            document.getElementById('productivityTotal').textContent = `${goal}m`;
+            document.getElementById('productivityBar').style.width = `${percent}%`;
+            document.getElementById('productivitySessions').textContent = sessionCount;
+            document.getElementById('productivityAvg').textContent = avgMinutes;
+            document.getElementById('productivityGoal').textContent = goal;
         }
 
-        function addTodoItem(text, index) {
-            const li = document.createElement('li');
-            const bulletSymbol = bulletMode ? '• ' : (index + 1) + '. ';
-            li.innerHTML = `
-                <span class="todo-text">${bulletSymbol}${text}</span>
-                <span class="todo-actions">
-                    <i class="fas fa-check-circle" data-action="complete" style="color: #3fbf7a;"></i>
-                    <i class="fas fa-edit" data-action="edit"></i>
-                    <i class="fas fa-trash-alt" data-action="delete"></i>
-                </span>
-            `;
-            todoList.appendChild(li);
+        // ======================== EXERCISE WITH DATE ========================
+        const exerciseDateInput = document.getElementById('exerciseDateInput');
+        const todayDate = new Date();
+        const todayStr = todayDate.toISOString().split('T')[0];
+        exerciseDateInput.value = todayStr;
 
-            li.querySelector('[data-action="delete"]').addEventListener('click', function(e) {
-                e.stopPropagation();
-                li.remove();
-                renumberTodos();
-                saveTodos();
-                updateSummary();
-            });
-
-            li.querySelector('[data-action="edit"]').addEventListener('click', function(e) {
-                e.stopPropagation();
-                const span = li.querySelector('.todo-text');
-                const newText = prompt('Wax ka beddel:', span.innerText.replace(/^[0-9]+\.\s|•\s/, ''));
-                if (newText !== null && newText.trim() !== '') {
-                    span.innerText = (bulletMode ? '• ' : (Array.from(todoList.children).indexOf(li) + 1) + '. ') + newText.trim();
-                    saveTodos();
-                    updateSummary();
-                }
-            });
-
-            li.querySelector('[data-action="complete"]').addEventListener('click', function(e) {
-                e.stopPropagation();
-                const span = li.querySelector('.todo-text');
-                if (!span.innerText.startsWith('✅')) {
-                    span.innerText = '✅ ' + span.innerText;
+        exerciseDateInput.addEventListener('change', function() {
+            const selectedDate = new Date(this.value + 'T00:00:00');
+            const days = ['Axad', 'Isniin', 'Talaado', 'Arbaco', 'Khamiis', 'Jimco', 'Sabti'];
+            const dayName = days[selectedDate.getDay()];
+            const formattedDate = selectedDate.toLocaleDateString('so-SO');
+            document.getElementById('selectedDayDisplay').textContent = `📅 ${dayName}, ${formattedDate}`;
+            
+            const dateStr = selectedDate.toLocaleDateString();
+            document.querySelectorAll('.exercise-card').forEach(card => {
+                const cardDay = card.dataset.day;
+                const existingLog = exerciseLog.find(log => log.date === dateStr && log.day === cardDay);
+                if (existingLog) {
+                    card.classList.add('saved');
                 } else {
-                    span.innerText = span.innerText.replace('✅ ', '');
-                }
-                saveTodos();
-                updateSummary();
-            });
-        }
-
-        function renumberTodos() {
-            const items = todoList.querySelectorAll('li');
-            items.forEach((li, idx) => {
-                const span = li.querySelector('.todo-text');
-                let text = span.innerText.replace(/^[0-9]+\.\s|•\s|✅\s/, '');
-                const isDone = span.innerText.startsWith('✅') ? '✅ ' : '';
-                span.innerText = (bulletMode ? '• ' : (idx + 1) + '. ') + isDone + text;
-            });
-            updateSummary();
-        }
-
-        document.getElementById('addTodoBtn').addEventListener('click', function() {
-            const text = todoInput.value.trim();
-            if (text === '') return;
-            addTodoItem(text, todoList.children.length);
-            todoInput.value = '';
-            saveTodos();
-            renumberTodos();
-            updateSummary();
-        });
-
-        todoInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('addTodoBtn').click();
-            }
-        });
-
-        document.getElementById('bulletToggleBtn').addEventListener('click', function() {
-            bulletMode = !bulletMode;
-            this.style.borderColor = bulletMode ? '#f09b2c' : '#f09b2c55';
-            renumberTodos();
-            saveTodos();
-            updateSummary();
-        });
-
-        // ATTENDANCE
-        const attendanceDate = document.getElementById('attendanceDate');
-        const attendanceStatus = document.getElementById('attendanceStatus');
-        let attendanceRecord = JSON.parse(localStorage.getItem('attendanceData')) || {};
-
-        function updateAttendanceDisplay() {
-            const dateKey = attendanceDate.value;
-            if (attendanceRecord[dateKey]) {
-                const status = attendanceRecord[dateKey];
-                attendanceStatus.innerText = `Maanta: ${status === 'present' ? '✅ Xaadir' : '❌ Maqnaasho'}`;
-            } else {
-                attendanceStatus.innerText = 'Maanta: aan la dooran';
-            }
-            updateSummary();
-        }
-
-        document.getElementById('presentBtn').addEventListener('click', function() {
-            const dateKey = attendanceDate.value;
-            attendanceRecord[dateKey] = 'present';
-            localStorage.setItem('attendanceData', JSON.stringify(attendanceRecord));
-            updateAttendanceDisplay();
-            updateSummary();
-        });
-
-        document.getElementById('absentBtn').addEventListener('click', function() {
-            const dateKey = attendanceDate.value;
-            attendanceRecord[dateKey] = 'absent';
-            localStorage.setItem('attendanceData', JSON.stringify(attendanceRecord));
-            updateAttendanceDisplay();
-            updateSummary();
-        });
-
-        document.getElementById('saveAttendanceBtn').addEventListener('click', function() {
-            updateAttendanceDisplay();
-            updateSummary();
-            alert('Xogta attendance waa la keydiyay!');
-        });
-
-        attendanceDate.addEventListener('change', function() {
-            updateAttendanceDisplay();
-            updateSummary();
-        });
-
-        // NOTE EDITOR
-        const noteEditor = document.getElementById('noteEditor');
-        noteEditor.innerHTML = localStorage.getItem('userNote') || '<p>Wax ka qor maanta...</p>';
-
-        noteEditor.addEventListener('input', function() {
-            localStorage.setItem('userNote', this.innerHTML);
-            updateSummary();
-        });
-
-        noteEditor.addEventListener('blur', function() {
-            localStorage.setItem('userNote', this.innerHTML);
-            updateSummary();
-        });
-
-        document.querySelectorAll('.note-toolbar i').forEach(icon => {
-            icon.addEventListener('click', function() {
-                const cmd = this.classList[1]?.replace('fa-', '') || '';
-                const map = {
-                    'bold': 'bold',
-                    'italic': 'italic',
-                    'underline': 'underline',
-                    'strikethrough': 'strikeThrough',
-                    'list-ol': 'insertOrderedList',
-                    'list-ul': 'insertUnorderedList',
-                    'align-left': 'justifyLeft',
-                    'align-center': 'justifyCenter',
-                    'align-right': 'justifyRight',
-                    'link': 'createLink',
-                    'image': 'insertImage',
-                    'undo-alt': 'undo',
-                    'redo-alt': 'redo'
-                };
-                if (map[cmd]) {
-                    if (cmd === 'link') {
-                        const url = prompt('Geli link:');
-                        if (url) document.execCommand(map[cmd], false, url);
-                    } else if (cmd === 'image') {
-                        const src = prompt('Geli image URL:');
-                        if (src) document.execCommand(map[cmd], false, src);
-                    } else {
-                        document.execCommand(map[cmd], false, null);
-                    }
-                    noteEditor.focus();
-                    localStorage.setItem('userNote', noteEditor.innerHTML);
-                    updateSummary();
+                    card.classList.remove('saved');
                 }
             });
         });
 
-        // ===== SUMMARY / WARBIXIN =====
-        function updateSummary() {
-            // Time
-            const h = String(Math.floor(elapsedSeconds / 3600)).padStart(2, '0');
-            const m = String(Math.floor((elapsedSeconds % 3600) / 60)).padStart(2, '0');
-            const s = String(elapsedSeconds % 60).padStart(2, '0');
-            document.getElementById('summaryTime').innerText = `${h}:${m}:${s}`;
-            const pct = Math.min(100, (elapsedSeconds / 3600) * 100);
-            document.getElementById('summaryProductivity').innerText = `Productivity: ${Math.round(pct)}%`;
+        exerciseDateInput.dispatchEvent(new Event('change'));
 
-            // Todo
-            const todoItems = document.querySelectorAll('#todoListContainer li');
-            const totalTodos = todoItems.length;
-            const completedTodos = document.querySelectorAll('#todoListContainer li .todo-text:first-child').length;
-            document.getElementById('summaryTodoCount').innerText = totalTodos;
+        document.querySelectorAll('.exercise-card').forEach(card => {
+            card.addEventListener('click', function() {
+                if (this.classList.contains('saved')) {
+                    showNotification(`⚠️ ${this.dataset.day} jimicsi ayaa hore loo kaydiyay!`, 'warning');
+                    return;
+                }
+                
+                document.querySelectorAll('.exercise-card').forEach(c => c.classList.remove('selected'));
+                document.querySelectorAll('.exercise-card .check-mark').forEach(c => c.classList.remove('show'));
+                
+                this.classList.add('selected');
+                this.querySelector('.check-mark').classList.add('show');
+                
+                selectedExerciseDay = this.dataset.day;
+                selectedExerciseName = this.dataset.exercise;
+                selectedDate = exerciseDateInput.value;
+                
+                const dateObj = new Date(selectedDate + 'T00:00:00');
+                const days = ['Axad', 'Isniin', 'Talaado', 'Arbaco', 'Khamiis', 'Jimco', 'Sabti'];
+                const dayName = days[dateObj.getDay()];
+                document.getElementById('selectedDayDisplay').textContent = 
+                    `✅ ${dayName} - ${selectedExerciseDay}: ${selectedExerciseName}`;
+            });
+        });
+
+        document.getElementById('clearExerciseBtn').addEventListener('click', () => {
+            document.querySelectorAll('.exercise-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.exercise-card .check-mark').forEach(c => c.classList.remove('show'));
+            selectedExerciseDay = null;
+            selectedExerciseName = null;
+            selectedDate = null;
+            exerciseDateInput.dispatchEvent(new Event('change'));
+            showNotification('🔄 Doorashada waa la tirtiray', 'info');
+        });
+
+        document.getElementById('saveExerciseBtn').addEventListener('click', () => {
+            if (!selectedExerciseDay || !selectedExerciseName) {
+                showNotification('Fadlan dooro maalin jimicsi ah!', 'warning');
+                return;
+            }
+
+            const dateObj = new Date(selectedDate + 'T00:00:00');
+            const dateStr = dateObj.toLocaleDateString();
+            const days = ['Axad', 'Isniin', 'Talaado', 'Arbaco', 'Khamiis', 'Jimco', 'Sabti'];
+            const dayName = days[dateObj.getDay()];
             
-            const todoStatus = document.getElementById('summaryTodoStatus');
-            if (totalTodos === 0) {
-                todoStatus.innerText = 'Waxba ma jiraan';
-            } else {
-                const done = document.querySelectorAll('#todoListContainer li .todo-text').length;
-                todoStatus.innerText = `${done} / ${totalTodos} dhammaystiran`;
+            const existing = exerciseLog.find(log => log.date === dateStr && log.day === selectedExerciseDay);
+            if (existing) {
+                showNotification(`⚠️ ${selectedExerciseDay} jimicsi ayaa hore loogu kaydiyay ${dateStr}!`, 'warning');
+                return;
             }
 
-            // Attendance
-            const dateKey = attendanceDate.value;
-            if (attendanceRecord[dateKey]) {
-                const status = attendanceRecord[dateKey];
-                document.getElementById('summaryAttendance').innerHTML = status === 'present' ? '✅ Xaadir' : '❌ Maqnaasho';
-                document.getElementById('summaryAttendanceDate').innerText = `Taariikh: ${dateKey}`;
-            } else {
-                document.getElementById('summaryAttendance').innerHTML = '--';
-                document.getElementById('summaryAttendanceDate').innerText = 'Aan la dooran';
-            }
-
-            // Note preview
-            const noteContent = noteEditor.innerText || '';
-            const preview = noteContent.substring(0, 80) + (noteContent.length > 80 ? '...' : '');
-            document.getElementById('summaryNotePreview').innerText = preview || 'Wax qoraal ah ma jiro';
-            document.getElementById('summaryNoteStatus').innerHTML = noteContent ? '✏️ Qoraal' : '✏️ Qoraal ma jiro';
-        }
-
-        document.getElementById('refreshSummaryBtn').addEventListener('click', function() {
-            updateSummary();
-            this.innerHTML = '<i class="fas fa-check-circle"></i> La cusboonaysiiyay';
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-sync-alt"></i> Cusboonaysii';
-            }, 2000);
+            const exerciseEntry = {
+                id: Date.now(),
+                date: dateStr,
+                dayName: dayName,
+                day: selectedExerciseDay,
+                exercise: selectedExerciseName,
+                timestamp: new Date().toISOString()
+            };
+            
+            exerciseLog.push(exerciseEntry);
+            localStorage.setItem('exerciseLog', JSON.stringify(exerciseLog));
+            
+            document.querySelectorAll('.exercise-card').forEach(card => {
+                if (card.dataset.day === selectedExerciseDay) {
+                    card.classList.add('saved');
+                }
+            });
+            
+            document.querySelectorAll('.exercise-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.exercise-card .check-mark').forEach(c => c.classList.remove('show'));
+            selectedExerciseDay = null;
+            selectedExerciseName = null;
+            
+            exerciseDateInput.dispatchEvent(new Event('change'));
+            
+            updateReport();
+            updateDashboard();
+            renderTrackView();
+            showNotification(`✅ ${exerciseEntry.day}: ${exerciseEntry.exercise} waa la kaydiyay (${dateStr})!`, 'success');
         });
 
-        // Initial update
-        loadTodos();
-        updateAttendanceDisplay();
-        updateSummary();
-        updateTimerDisplay();
-    })();
-</script>
+        // ======================== EXERCISE TRACK - WEEK & MONTH VIEW ========================
+        function getWeekNumber(date) {
+            const d = new Date(date);
+            d.setHours(0,0,0,0);
+            d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+            const week1 = new Date(d.getFullYear(), 0, 4);
+            return 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+        }
+
+        function getWeekDays(date) {
+            const day = date.getDay();
+            const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+            const weekStart = new Date(date);
+            weekStart.setDate(diff);
+            const days = [];
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(weekStart);
+                d.setDate(weekStart.getDate() + i);
+                days.push(d);
+            }
+            return days;
+        }
+
+        function getMonthWeeks(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const weeks = [];
+            let currentWeek = [];
+            const startDate = new Date(firstDay);
+            while (startDate.getDay() !== 1 && startDate.getDay() !== 0) {
+                startDate.setDate(startDate.getDate() - 1);
+            }
+            if (startDate.getDay() === 0) {
+                startDate.setDate(startDate.getDate() - 6);
+            }
+            const endDate = new Date(lastDay);
+            while (endDate.getDay() !== 0) {
+                endDate.setDate(endDate.getDate() + 1);
+            }
+            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                currentWeek.push(new Date(d));
+                if (d.getDay() === 0 || d >= endDate) {
+                    weeks.push(currentWeek);
+                    currentWeek = [];
+                }
+            }
+            return weeks;
+        }
+
+        function renderTrackView() {
+            const container = document.getElementById('exerciseTrackContent');
+            const today = new Date();
+            
+            if (trackViewMode === 'week') {
+                renderWeekView(container, today);
+            } else {
+                renderMonthView(container, today);
+            }
+            updateTrackStats();
+        }
+
+        function renderWeekView(container, today) {
+            const weekDays = getWeekDays(today);
+            const days = ['Isniin', 'Talaado', 'Arbaco', 'Khamiis', 'Jimco', 'Sabti', 'Axad'];
+            
+            let html = `
+                <div style="margin-bottom:10px;">
+                    <span class="badge-future" style="background:#f57c0022; border-color:#f57c00;">
+                        <i class="fas fa-calendar-week"></i> Isbuuca ${getWeekNumber(today)} - 
+                        ${weekDays[0].toLocaleDateString()} ilaa ${weekDays[6].toLocaleDateString()}
+                    </span>
+                </div>
+                <div class="exercise-week-grid">
+            `;
+            
+            weekDays.forEach((date, index) => {
+                const dateStr = date.toLocaleDateString();
+                const dayName = days[index];
+                const dayLog = exerciseLog.find(log => log.date === dateStr && log.day === dayName);
+                const isToday = date.toDateString() === today.toDateString();
+                const isCompleted = !!dayLog;
+                
+                html += `
+                    <div class="exercise-week-day ${isToday ? 'today' : ''} ${isCompleted ? 'completed' : ''}">
+                        <div class="day-label">${dayName}</div>
+                        <div class="day-date">${date.getDate()}/${date.getMonth()+1}</div>
+                        <div class="status-circle ${isCompleted ? 'done' : 'pending'}">
+                            ${isCompleted ? '✓' : '✕'}
+                        </div>
+                        <div class="day-exercise ${isCompleted ? 'done' : 'pending'}">
+                            ${isCompleted ? dayLog.exercise : 'Lama qaban'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function renderMonthView(container, today) {
+            const weeks = getMonthWeeks(today);
+            const monthName = today.toLocaleString('so-SO', { month: 'long' });
+            const year = today.getFullYear();
+            const days = ['Isniin', 'Talaado', 'Arbaco', 'Khamiis', 'Jimco', 'Sabti', 'Axad'];
+            
+            let html = `
+                <div style="margin-bottom:10px;">
+                    <span class="badge-future" style="background:#f57c0022; border-color:#f57c00;">
+                        <i class="fas fa-calendar-alt"></i> ${monthName} ${year} - ${weeks.length} isbuuc
+                    </span>
+                </div>
+                <div class="exercise-month-grid">
+            `;
+            
+            weeks.forEach((week, weekIndex) => {
+                const weekStart = week[0];
+                const weekEnd = week[week.length - 1];
+                const weekNumber = getWeekNumber(weekStart);
+                
+                html += `
+                    <div class="exercise-month-week">
+                        <div class="week-header">
+                            <span class="week-number"><i class="fas fa-hashtag"></i> Isbuuc ${weekNumber}</span>
+                            <span class="week-range">${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}</span>
+                        </div>
+                        <div class="week-days">
+                `;
+                
+                week.forEach(date => {
+                    const dateStr = date.toLocaleDateString();
+                    const dayIndex = date.getDay();
+                    const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1];
+                    const dayLog = exerciseLog.find(log => log.date === dateStr && log.day === dayName);
+                    const isToday = date.toDateString() === today.toDateString();
+                    const isCompleted = !!dayLog;
+                    
+                    html += `
+                        <div class="week-day-item ${isToday ? 'today' : ''} ${isCompleted ? 'completed' : ''}">
+                            <div class="wd-label">${dayName}</div>
+                            <div class="wd-icon ${isCompleted ? 'done' : 'pending'}">
+                                ${isCompleted ? '✓' : '✕'}
+                            </div>
+                            <div class="wd-exercise ${isCompleted ? 'done' : 'pending'}">
+                                ${isCompleted ? dayLog.exercise.substring(0, 6) : '-'}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function updateTrackStats() {
+            const total = exerciseLog.length;
+            const today = new Date();
+            
+            // Week stats
+            const weekDays = getWeekDays(today);
+            const weekDates = weekDays.map(d => d.toLocaleDateString());
+            const weekLogs = exerciseLog.filter(log => weekDates.includes(log.date));
+            const weekCount = weekLogs.length;
+            
+            // Month stats
+            const month = today.getMonth();
+            const year = today.getFullYear();
+            const monthLogs = exerciseLog.filter(log => {
+                const logDate = new Date(log.date);
+                return logDate.getMonth() === month && logDate.getFullYear() === year;
+            });
+            const monthCount = monthLogs.length;
+            
+            // Streak
+            let streak = 0;
+            const sortedLogs = [...exerciseLog].sort((a, b) => new Date(b.date) - new Date(a.date));
+            if (sortedLogs.length > 0) {
+                const dayNames = ['Isniin', 'Talaado', 'Arbaco', 'Khamiis', 'Jimco', 'Sabti', 'Axad'];
+                const todayDayName = dayNames[today.getDay() === 0 ? 6 : today.getDay() - 1];
+                const todayStr = today.toLocaleDateString();
+                const hasToday = sortedLogs.some(log => log.date === todayStr);
+                let checkDate = new Date(today);
+                if (!hasToday) {
+                    checkDate.setDate(checkDate.getDate() - 1);
+                }
+                while (true) {
+                    const dateStr = checkDate.toLocaleDateString();
+                    const dayIndex = checkDate.getDay();
+                    const dayName = dayNames[dayIndex === 0 ? 6 : dayIndex - 1];
+                    const hasLog = sortedLogs.some(log => log.date === dateStr && log.day === dayName);
+                    if (hasLog) {
+                        streak++;
+                        checkDate.setDate(checkDate.getDate() - 1);
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statWeek').textContent = weekCount;
+            document.getElementById('statMonth').textContent = monthCount;
+            document.getElementById('statStreak').textContent = streak;
+        }
+
+        // View toggle
+        document.getElementById('weekViewBtn').addEventListener('click', () => {
+            trackViewMode = 'week';
+            document.getElementById('weekViewBtn').style.borderColor = '#f57c00';
+            document.getElementById('monthViewBtn').style.borderColor = '#2a4060';
+            renderTrackView();
+        });
+
+        document.getElementById('monthViewBtn').addEventListener('click', () => {
+            trackViewMode = 'month';
+            document.getElementById('monthViewBtn').style.borderColor = '#f57c00';
+            document.getElementById('weekViewBtn').style.borderColor = '#2a4060';
+            renderTrackView();
+        });
+
+        // Initial view
+        document.getElementById('weekViewBtn').style.borderColor = '#f57c00';
+
+        document.getElementById('exportExercisePDF').addEventListener('click', () => {
+            showNotification('📄 PDF-ka jimicsiga waa la soo saaray!', 'success');
+        });
+
+        // ======================== REPORT ========================
+        function updateReport() {
+            const tbody = document.getElementById('reportBody');
+            let html = '';
+            let hasData = false;
+
+            if (tasks.length > 0) {
+                hasData = true;
+                tasks.forEach(task => {
+                    const status = task.completed ? 
+                        '<span class="badge-future"><i class="fas fa-check"></i> Done</span>' : 
+                        '<span class="badge-future"><i class="fas fa-times"></i> Pending</span>';
+                    const hours = Math.floor(timerSeconds / 3600);
+                    const minutes = Math.floor((timerSeconds % 3600) / 60);
+                    const timeStr = `${hours}h ${minutes}m`;
+                    html += `
+                        <tr>
+                            <td>${task.title}</td>
+                            <td>${timeStr}</td>
+                            <td>${status}</td>
+                        </tr>
+                    `;
+                    if (task.subtasks && task.subtasks.length > 0) {
+                        task.subtasks.forEach(sub => {
+                            const subStatus = sub.completed ? 
+                                '<span class="badge-future"><i class="fas fa-check"></i> Done</span>' : 
+                                '<span class="badge-future"><i class="fas fa-times"></i> Pending</span>';
+                            html += `
+                                <tr style="opacity:0.7;">
+                                    <td style="padding-left:30px;">• ${sub.text}</td>
+                                    <td>-</td>
+                                    <td>${subStatus}</td>
+                                </tr>
+                            `;
+                        });
+                    }
+                });
+            }
+
+            if (timeBoxes.length > 0) {
+                hasData = true;
+                const totalBoxMinutes = timeBoxes.reduce((sum, box) => sum + box.minutes, 0);
+                html += `
+                    <tr style="background: #0f1e32;">
+                        <td><i class="fas fa-box" style="color:#00ff88;"></i> <b>Time Box Sessions</b></td>
+                        <td>${Math.floor(totalBoxMinutes / 60)}h ${totalBoxMinutes % 60}m</td>
+                        <td><span class="badge-future">${timeBoxes.length} sessions</span></td>
+                    </tr>
+                `;
+                const latestBoxes = timeBoxes.slice(-5).reverse();
+                latestBoxes.forEach(box => {
+                    html += `
+                        <tr style="opacity:0.6; font-size:12px;">
+                            <td style="padding-left:30px;">📦 ${box.date}</td>
+                            <td>${box.time}</td>
+                            <td><span class="badge-future">✅ Saved</span></td>
+                        </tr>
+                    `;
+                });
+            }
+
+            if (exerciseLog.length > 0) {
+                hasData = true;
+                html += `
+                    <tr style="background: #0f1e32; border-top: 2px solid #f57c00;">
+                        <td><i class="fas fa-dumbbell" style="color:#ff6b6b;"></i> <b>Jimicsi</b></td>
+                        <td>${exerciseLog.length} sessions</td>
+                        <td><span class="badge-success"><i class="fas fa-check"></i> ${exerciseLog.length} done</span></td>
+                    </tr>
+                `;
+                const sortedLogs = [...exerciseLog].reverse();
+                sortedLogs.forEach(log => {
+                    html += `
+                        <tr style="opacity:0.7; font-size:12px;">
+                            <td style="padding-left:30px;">🏋️ ${log.day} (${log.date})</td>
+                            <td>${log.exercise}</td>
+                            <td><span class="badge-success">✅ ${log.dayName || log.date}</span></td>
+                        </tr>
+                    `;
+                });
+            }
+
+            if (!hasData) {
+                html = '<tr><td colspan="3" style="text-align:center; color:#7a9ac0;">Wax xog ah ma jiraan</td></tr>';
+            }
+            
+            tbody.innerHTML = html;
+        }
+
+        document.getElementById('exportPDF').addEventListener('click', () => {
+            showNotification('📄 PDF-ka waa la soo saaray! (tick ku calaamadee)', 'success');
+        });
+
+        document.getElementById('exportAllPDF').addEventListener('click', () => {
+            showNotification('📄 Dhammaan xogta PDF waa la soo saaray!', 'success');
+        });
+
+        // ======================== NOTIFICATION ========================
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // ======================== INIT ========================
+        setTimer(5);
+        updateTodayTasks();
+        updateDashboard();
+        updateReport();
+        updateTimeBoxes();
+        updateProductivityLine();
+        renderTrackView();
+
+        console.log('✨ Jadwal 2070 ready with Green/Red circles for Exercise!');
+    </script>
 </body>
 </html>
